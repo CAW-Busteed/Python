@@ -2,13 +2,6 @@ import pygame
 import random
 import time
 
-
-#setup of caption, sounds, clock, intitialize
-pygame.display.set_caption('Asteroids Clone')
-
-clock = pygame.time.Clock()
-
-
 #and the fundamental controls imports
 from pygame.locals import (
     RLEACCEL,
@@ -23,28 +16,26 @@ from pygame.locals import (
 
 SW = 1600
 SH = 1200
-screen = pygame.display.set_mode((SW, SH))
 
-#then come the assets
-bg = pygame.image.load('Assets/starry_sky_bg.jpg')
-bg = pygame.transform.scale(bg, (1600, 1200))
-# TODO: animate gif, make black on icon transparent 
-player_icon = pygame.image.load('Assets/player_ship.gif')
-screen = pygame.display.set_mode((SW, SH))
-gameover = False
+PLAYER_ICON = pygame.image.load('Assets/player_ship.gif')
+BG = pygame.image.load('Assets/starry_sky_bg.jpg')
+BG = pygame.transform.scale(BG, (1600, 1200))
 
 
 class Player(object):
+
     def __init__(self):
-        self.img = player_icon
+        self.img = PLAYER_ICON
         self.w = self.img.get_width()
         self.h = self.img.get_height()
         #position shortcut?
-        self.x = SW//2
-        self.y = SH//2
+        self.x = SW // 2
+        self.y = SH // 2
+
     # TODO: change movement to orientation
     def draw(self, win):
         win.blit(self.img, [self.x, self.y, self.w, self.h])
+
     #copy-pasted from simple, need to figure out how to orient it
     def update(self, pressed_keys):
         if pressed_keys[K_UP]:
@@ -56,26 +47,36 @@ class Player(object):
         if pressed_keys[K_RIGHT]:
             self.rect.move_ip(5, 0)
 
-# an alternative
-#class Player(pygame.sprite.Sprite):
-#    def __init__(self):
-#        super(Player, self).__init__()
-#        #convert optimizes, set color key determines which color code to make transparent
-#        self.surf = pygame.image.load('Assets/player_ship.gif').convert()
-#        self.surf.set_colorkey((0, 0, 0), RLEACCEL)
-#        self.rect = self.surf.get_rect()
+
+SCREEN = pygame.display.set_mode((SW, SH))
+
+clock = pygame.time.Clock()
 player = Player()
 
 
-pygame.mixer.init
-pygame.init
-
 def redrawGameWindow():
-    screen.blit(bg, (0,0))
-    player.draw(screen)
+    SCREEN.blit(BG, (0, 0))
+    player.draw(SCREEN)
     pygame.display.update()
 
+
+#setup of caption, sounds, clock, intitialize
+def initialize():
+    pygame.display.set_caption('Asteroids Clone')
+    #then come the assets
+
+    # TODO: animate gif, make black on icon transparent
+    SCREEN = pygame.display.set_mode((SW, SH))
+
+    pygame.mixer.init()
+    pygame.init()
+
+
+initialize()
+
 run = True
+gameover = False
+
 while run:
     clock.tick(60)
     if not gameover:
@@ -93,4 +94,31 @@ while run:
         elif event.type == QUIT:
             run = False
     redrawGameWindow()
+
 pygame.quit()
+
+# an alternative
+#class Player(pygame.sprite.Sprite):
+#    def __init__(self):
+#        super(Player, self).__init__()
+#        #convert optimizes, set color key determines which color code to make transparent
+#        self.surf = pygame.image.load('Assets/player_ship.gif').convert()
+#        self.surf.set_colorkey((0, 0, 0), RLEACCEL)
+#        self.rect = self.surf.get_rect()
+
+# class Block(pygame.sprite.Sprite):
+
+#     # Constructor. Pass in the color of the block,
+#     # and its x and y position
+#     def __init__(self, color, width, height):
+#        # Call the parent class (Sprite) constructor
+#        pygame.sprite.Sprite.__init__(self)
+
+#        # Create an image of the block, and fill it with a color.
+#        # This could also be an image loaded from the disk.
+#        self.image = pygame.Surface([width, height])
+#        self.image.fill(color)
+
+#        # Fetch the rectangle object that has the dimensions of the image
+#        # Update the position of this object by setting the values of rect.x and rect.y
+#        self.rect = self.image.get_rect()
