@@ -1,6 +1,8 @@
 import pygame
 import random
 import time
+import math
+from pygame.math import Vector2
 
 #and the fundamental controls imports
 from pygame.locals import (
@@ -14,12 +16,12 @@ from pygame.locals import (
     QUIT,
 )
 
-SW = 1600
-SH = 1200
+SW = 400
+SH = 300
 
 PLAYER_ICON = pygame.image.load('Assets/player_ship.gif')
 BG = pygame.image.load('Assets/starry_sky_bg.jpg')
-BG = pygame.transform.scale(BG, (1600, 1200))
+BG = pygame.transform.scale(BG, (SW, SH))
 
 
 class Player(object):
@@ -86,10 +88,16 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        if event.type == KEYDOWN:
+        elif event.type == KEYDOWN:
+            #want to add controls to player: orient (r&l keys) accelerate (up), brake(down), and eventually shoot (sending a projectile with spacebar)
+            #pygame.transform.rotate() by 2-4 degrees for orientation
+            # Acceleration is cumulative, so every second of KEYDOWN_UP should increase velocity on an axis for a maximum of 299
+            #brake would reduce speed on axis until -20 (backing up slowly in comparison)
             # If the Esc key is pressed, then exit the main loop
             if event.key == K_ESCAPE:
                 run = False
+            elif event.key == K_RIGHT:
+                player.img= pygame.transform.rotate(PLAYER_ICON, -90).convert()
         # Check for QUIT event. If QUIT, then set running to false.
         elif event.type == QUIT:
             run = False
