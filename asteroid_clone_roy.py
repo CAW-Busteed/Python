@@ -30,7 +30,7 @@ class Player(pygame.sprite.Sprite):
         super(Player, self).__init__()
 
         self.surf = PLAYER_ICON.convert()
-        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        self.surf.set_colorkey((0, 0, 0), RLEACCEL)
         self.rect = self.surf.get_rect()
 
         # set initial position and angle
@@ -114,16 +114,17 @@ player = Player()
 
 
 def redrawGameWindow():
-    SCREEN.blit(BG, (0, 0))
-    player.draw(SCREEN)
-    pygame.display.update()
-    import pdb
-    pdb.set_trace()
-    player.surf = pygame.transform.rotate(player.surf, 90)
-    player.surf = pygame.transform.scale(player.surf, (200, 200))
+    # SCREEN.blit(BG, (0, 0))
+    # player.draw(SCREEN)
+    # pygame.display.update()
+    
+
+    player.surf = pygame.transform.rotate(player.surf, -40)
+    player.surf = pygame.transform.scale(player.surf, (110, 110))
     SCREEN.blit(BG, (0, 0))
     SCREEN.blit(player.surf, pygame.Rect(100, 100, 100, 100))
     pygame.display.update()
+
 
 
 #setup of caption, sounds, clock, intitialize
@@ -131,7 +132,7 @@ def initialize():
     pygame.display.set_caption('Asteroids Clone')
     #then come the assets
 
-    # TODO: animate gif, make black on icon transparent
+    # TODO: animate gif
     SCREEN = pygame.display.set_mode((SW, SH))
 
     pygame.mixer.init()
@@ -144,21 +145,21 @@ run = True
 gameover = False
 
 while run:
-    clock.tick(60)
-    if not gameover:
+    clock.tick(20)
+    # if not gameover:
         #pass acts as a placeholder. Neat trick!
         #already imported controls
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            player.turnLeft()
-        if keys[pygame.K_RIGHT]:
-            player.turnRight()
-        if keys[pygame.K_UP]:
-            player.moveForward()
-        # translate coordinates to keep player in bounds
-        #OR make it so screen follows player
-        if player.rect.left < -10:
-            player.rect.left = -10
+        # keys = pygame.key.get_pressed()
+        # if keys[pygame.K_LEFT]:
+        #     player.turnLeft()
+        # if keys[pygame.K_RIGHT]:
+        #     player.turnRight()
+        # if keys[pygame.K_UP]:
+        #     player.moveForward()
+        # # translate coordinates to keep player in bounds
+        # #OR make it so screen follows player
+        # if player.rect.left < -10:
+        #     player.rect.left = -10
         # if player.rect.right > SW:
         #     player.rect.right = SW
         # if player.rect.top <= -10:
