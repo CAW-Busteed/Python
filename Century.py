@@ -19,5 +19,5 @@ elif age >= 76 and age <= 99:
 elif age >= 100:
     print("why are you checking? You're already there.")
 
-#else age 9:
-#    print("How are you reading this? Goo-goo ga ga, kiddo.")
+elif age <= 10:
+    print("How are you reading this? Goo-goo ga ga, kiddo.")
