@@ -13,17 +13,30 @@ if num % x == 0
 
 '''
 
+# i = [x for x in range(2, num) if num % x == 0]
+
+def is_prime(n1):
+    for x in range(2, n1):
+        if (n1 % x) == 0:
+            print('Not a prime.')
+            break
+        else:
+            continue
+    if x == num-1:
+        print('This is a prime!')
+
 num = int(input('Give a number to check if it is a prime: '))
-i = [x for x in range(2, num) if num % x == 0]
+is_prime(num)
 
-def check_prime(n):
-    if len(i) == 0:
-        print('Prime!')
-    else:
-        print('Not a prime!')
-        print(i)
 
-check_prime(num)
+# def check_prime(n):
+#     if len(i) == 0:
+#         print('Prime!')
+#     else:
+#         print('Not a prime!')
+#         print(i)
+
+# check_prime(num)
 
 
 
