@@ -9,25 +9,8 @@ if num % x == 0
      yes:   print(number, ' is not a prime number.')
     no:    print(number, ' is a prime number.')
 
-
-
-'''
-
-# i = [x for x in range(2, num) if num % x == 0]
-
-def is_prime(n1):
-    for x in range(2, n1):
-        if (n1 % x) == 0:
-            print('Not a prime.')
-            break
-        else:
-            continue
-    if x == num-1:
-        print('This is a prime!')
-
-num = int(input('Give a number to check if it is a prime: '))
-is_prime(num)
-
+# num = int(input('Give a number to check if it is a prime: '))
+# if is_prime(num): 
 
 # def check_prime(n):
 #     if len(i) == 0:
@@ -50,4 +33,26 @@ is_prime(num)
 # # NUMBER = int(input('Give me a number: '))
 
 # prime(NUMBER)
+
+
+
+'''
+
+# i = [x for x in range(2, num) if num % x == 0]
+
+def is_prime(n1):
+    for x in range(2, n1):
+        if (n1 % x) == 0:
+            return False
+        else:
+            continue
+    return True
+
+
+
+
+for i in range(1, 100):
+    if is_prime(i):
+        print(i, end= ', ')
+
 
