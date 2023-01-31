@@ -40,6 +40,13 @@ if num % x == 0
 
 # i = [x for x in range(2, num) if num % x == 0]
 
+def add_val(x, y):
+    return x + y
+
+
+
+
+
 def is_prime(n1):
     for x in range(2, n1):
         if (n1 % x) == 0:
