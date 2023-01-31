@@ -8,5 +8,12 @@
 
 a = [5, 10, 15, 20, 25]
 
-def find_range():
-    
+def find_range(list):
+    minimum = list[0]
+    maximum = list[-1]
+    return [minimum, maximum]
+    #return [minimum] +' is the smallest in the list, and '+ maximum + ' is the biggest.'
+
+
+
+print(find_range(a))
