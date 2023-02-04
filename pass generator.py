@@ -23,19 +23,24 @@ num_ = list(string.digits)
 word_ = ['avocado', 'penguin', 'giraffe', 'brave', 'telephone', 'superfluous', 'hydrodynamic']
 
 #user inputs password preference
-LENGTH = input('Please clarify if you would like a short, medium, or long password.')
+LENGTH = input('Please clarify if you would like a short, medium, or long password. ')
 
 def pass_gen(n):
     password = []
-    # def ran_choice(n):
+    def ran_choice(n):
+        # x1 = random.choice(let_)
+        # x2 = random.choice(sym_)
+        # x3 = random.choice(num_)
+        # return (x1, x2, x3)
+        return random.choice(let_ + sym_ + num_)
+        
         
     #     random.choices(let_ + sym_ + num_)
     if n == 'short':
-        password.append(random.choice(let_))
-        password.append(random.choice(sym_))
-        password.append(random.choice(num_))
-        PW = "".join(password)
-        return PW
+        while len(password) < 8:
+            password.append(ran_choice(n))
+        return password   
+            
         # while len(password) < 8:
         # for i in :
         #     password.append(random.choice(let_))
@@ -53,5 +58,6 @@ def pass_gen(n):
             pass
     else:
         return 'Answer not applicable. Please choose short, medium, or long.'
+    
 
 print(pass_gen(LENGTH))
