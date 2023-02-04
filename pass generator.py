@@ -20,7 +20,7 @@ import string
 let_ = list(string.ascii_letters)
 sym_ = list(string.punctuation)
 num_ = list(string.digits)
-word_ = ['avocado', 'penguin', 'giraffe', 'brave', 'telephone', 'superfluous', 'hydrodynamic']
+word_ = ['avocado', 'penguin', 'giraffe', 'brave', 'telephone', 'superfluous', 'hydrodynamic', 'zoo', 'moist', 'banana', 'corn', 'damsel', 'explode', 'french']
 
 #user inputs password preference
 LENGTH = input('Please clarify if you would like a short, medium, or long password. ')
@@ -42,13 +42,19 @@ def pass_gen(n):
     elif n == 'medium':
         while len(password) < random.randrange(12,17):
             password = password + ran_choice(n)
-            #password = password + random.choice(word_)
+            if len(password) < 4:
+                password = password + random.choice(word_)
+            else:
+                continue
         return password
 
     elif n == 'long':
         while len(password) < random.randrange(20,32):
             password = password + ran_choice(n)
-            #password = password + random.choice(word_)
+            if len(password) < 10:
+                password = password + random.choice(word_)
+            else:
+                continue
         return password
     else:
         return 'Answer not applicable. Please choose short, medium, or long.'
