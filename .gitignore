@@ -1,0 +1,4 @@
+/venv/
+/pwgen/.vscode/
+/pwgen/__pycache__/
+/pwgen/tests/__pycache__/
