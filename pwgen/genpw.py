@@ -22,38 +22,36 @@ sym_ = list(string.punctuation)
 num_ = list(string.digits)
 word_ = ['avocado', 'penguin', 'giraffe', 'brave', 'telephone', 'superfluous', 'hydrodynamic', 'zoo', 'moist', 'banana', 'corn', 'damsel', 'explode', 'french']
 
-def ran_choice(n):
+def ran_choice():
     x1 = random.choice(let_)
     x2 = random.choice(sym_)
     x3 = random.choice(num_)
     choices = x1 + x2 + x3
     return choices       
-    
+
+def create_pw(_password, _len, _range):
+        while len(_password) < random.randrange(_range[0], _range[1]):
+            _password = _password + ran_choice()
+            if len(_password) < _len:
+                _password = _password + random.choice(word_)
+            else:
+                continue
+        return _password
+
 def pass_gen(n):
     password = ""
 
     if n == 'short':
         while len(password) < 8:
-            password = password + ran_choice(n)
+            password = password + ran_choice()
         return password  
     
     elif n == 'medium':
-        while len(password) < random.randrange(12,17):
-            password = password + ran_choice(n)
-            if len(password) < 4:
-                password = password + random.choice(word_)
-            else:
-                continue
-        return password
-    
+        return create_pw(n, password, 4, (12, 17))
+
     elif n == 'long':
-        while len(password) < random.randrange(20,32):
-            password = password + ran_choice(n)
-            if len(password) < 10:
-                password = password + random.choice(word_)
-            else:
-                continue
-        return password
+        return create_pw(n, password, 10, (20, 32))
+ 
     else:
         return 'Answer not applicable. Please choose short, medium, or long.'
     

@@ -1,6 +1,9 @@
 from pwgen import genpw
 
-def test_pwgen_shor():
+def test_ran_choice():
+    assert len(genpw.ran_choice()) == 3
+    
+def test_pwgen_short():
     x = len(genpw.pass_gen('short'))
     assert x <= 9 
 
