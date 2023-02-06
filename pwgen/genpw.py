@@ -23,10 +23,10 @@ num_ = list(string.digits)
 word_ = ['avocado', 'penguin', 'giraffe', 'brave', 'telephone', 'superfluous', 'hydrodynamic', 'zoo', 'moist', 'banana', 'corn', 'damsel', 'explode', 'french']
 
 def ran_choice():
-    x1 = random.choice(let_)
-    x2 = random.choice(sym_)
-    x3 = random.choice(num_)
-    choices = x1 + x2 + x3
+    arr = []
+    for _set in (let_, sym_, num_):
+      arr.append(random.choice(_set))
+      choices = ''.join(arr)
     return choices       
 
 def create_pw(_password, _len, _range):
@@ -47,10 +47,10 @@ def pass_gen(n):
         return password  
     
     elif n == 'medium':
-        return create_pw(n, password, 4, (12, 17))
+        return create_pw(password, 4, (12, 17))
 
     elif n == 'long':
-        return create_pw(n, password, 10, (20, 32))
+        return create_pw(password, 10, (20, 32))
  
     else:
         return 'Answer not applicable. Please choose short, medium, or long.'
