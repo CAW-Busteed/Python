@@ -17,6 +17,10 @@ import random
 import string
 
 
+SHORT = 'short'
+MED = 'medium'
+LONG = 'long'
+
 let_ = list(string.ascii_letters)
 sym_ = list(string.punctuation)
 num_ = list(string.digits)
@@ -41,21 +45,21 @@ def create_pw(_password, _len, _range):
 def pass_gen(n):
     password = ""
 
-    if n == 'short':
+    if n == SHORT:
         while len(password) < 8:
             password = password + ran_choice()
         return password  
     
-    elif n == 'medium':
+    elif n == MED:
         return create_pw(password, 4, (12, 17))
 
-    elif n == 'long':
+    elif n == LONG:
         return create_pw(password, 10, (20, 32))
  
     else:
-        return 'Answer not applicable. Please choose short, medium, or long.'
+        return 'Answer not applicable. Please choose SHORT, medium, or long.'
     
 
 if __name__ == '__main__':
-    LENGTH = input('Please clarify if you would like a short, medium, or long password. ')
+    LENGTH = input(f'Please clarify if you would like a {SHORT}, {MED}, or {LONG} password. ')
     print(pass_gen(LENGTH))
