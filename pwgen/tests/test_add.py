@@ -1,4 +1,4 @@
-from add import add
+from pwgen import add
 
 def test_df():
-    assert add(1, 2) == 3
+    assert add.add(1, 2) == 3
