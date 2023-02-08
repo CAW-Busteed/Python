@@ -59,7 +59,6 @@ def pass_gen(n):
     else:
         return 'Answer not applicable. Please choose SHORT, medium, or long.'
     
-
 if __name__ == '__main__':
     LENGTH = input(f'Please clarify if you would like a {SHORT}, {MED}, or {LONG} password. ')
     print(pass_gen(LENGTH))
