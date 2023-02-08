@@ -3,3 +3,4 @@
 /pwgen/__pycache__/
 /pwgen/tests/__pycache__/
 *.pyc
+pwgen/venv1/
