@@ -24,8 +24,8 @@ num_y = str(random.randint(0,9))
 num_z = str(random.randint(0,9))
 NUM_ = [num_w, num_x, num_y, num_z]
 
-start_mes = 'A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place. Guess 4-digits. '
-user_comp = input(str(start_mes))
+# start_mes = 'A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place. Guess 4-digits. '
+# user_comp = input(str(start_mes))
 
 # ''.join(NUM_)
 # print([*user_comp])
@@ -40,8 +40,9 @@ user_comp = input(str(start_mes))
 #         sim = [x for x in [*user_comp] if x in NUM_]
 #         if len(sim) > 0:
 
-def compare():
+def compare(x, y):
     return 1
+    
 
             
 

@@ -1,4 +1,4 @@
-from bull import compare
+from ex18.bull import compare
 
 # def test_df():
 #     assert add.add(1, 2) == 3
