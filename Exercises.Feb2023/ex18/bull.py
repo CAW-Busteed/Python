@@ -9,6 +9,7 @@ Every time the user makes a guess, tell them how many “cows” and “bulls”
 Once the user guesses the correct number, the game is over. 
 Keep track of the number of guesses the user makes throughout the game and tell the user at the end.
 
+generated (n) is array of digits
 
 
 '''
@@ -29,15 +30,19 @@ user_comp = input(str(start_mes))
 # ''.join(NUM_)
 # print([*user_comp])
 
-def num_check(n):
-    if ''.join(NUM_) == user_comp:
-            tally = tally + 1
-            return('All cows, correct!')
-            return(tally)
-    else:
-        response = []
-        sim = [x for x in [*user_comp] if x in NUM_]
-        if len(sim) > 0:
+# def num_check(n):
+#     if ''.join(NUM_) == user_comp:
+#             tally = tally + 1
+#             return('All cows, correct!')
+#             return(tally)
+#     else:
+#         response = []
+#         sim = [x for x in [*user_comp] if x in NUM_]
+#         if len(sim) > 0:
+
+def compare():
+    return 1
+
             
 
 
