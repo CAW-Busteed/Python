@@ -18,10 +18,10 @@ import random
 tally = 0
 
 #TODO find a way to put all these together more efficiently
-num_w = str(random.randint(0,9))
-num_x = str(random.randint(0,9))
-num_y = str(random.randint(0,9))
-num_z = str(random.randint(0,9))
+num_w = str(random.randint(0, 9))
+num_x = str(random.randint(0, 9))
+num_y = str(random.randint(0, 9))
+num_z = str(random.randint(0, 9))
 NUM_ = [num_w, num_x, num_y, num_z]
 
 # start_mes = 'A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place. Guess 4-digits. '
@@ -40,15 +40,11 @@ NUM_ = [num_w, num_x, num_y, num_z]
 #         sim = [x for x in [*user_comp] if x in NUM_]
 #         if len(sim) > 0:
 
+
 def compare(x, y):
     return 1
-    
-
-            
 
 
-
-    
-    
-
-
+if __name__ == '__main__':
+    start_mes = 'A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place. Guess 4-digits. '
+    user_comp = input(str(start_mes))
