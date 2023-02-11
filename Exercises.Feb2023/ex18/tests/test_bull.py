@@ -1,9 +1,5 @@
 from ex18.bull import compare
 
-# def test_df():
-#     assert add.add(1, 2) == 3
-
-
 def test_compare_ok():
     a = [1, 2, 3, 4]
     b = [3, 3, 3, 3]
