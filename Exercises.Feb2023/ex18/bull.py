@@ -40,7 +40,7 @@ def compare(numbers, guess):
                 bull+=1
         else:
             pass
-    return bull
+    return [bull]
 
 
     # for x in range(len(numbers)):
