@@ -10,25 +10,13 @@ Once the user guesses the correct number, the game is over.
 Keep track of the number of guesses the user makes throughout the game and tell the user at the end.
 
 generated (n) is array of digits
-
-
 '''
 import random
 # NUM_ = [random.randint(0,9), random.randint(0,9), random.randint(0,9), random.randint(0,9)]
-tally = 0
 
-#TODO find a way to put all these together more efficiently
-num_w = str(random.randint(0,9))
-num_x = str(random.randint(0,9))
-num_y = str(random.randint(0,9))
-num_z = str(random.randint(0,9))
-NUM_ = [num_w, num_x, num_y, num_z]
 
-# start_mes = 'A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place. Guess 4-digits. '
+# 'A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place. Guess 4-digits. '
 # user_comp = input(str(start_mes))
-
-# ''.join(NUM_)
-# print([*user_comp])
 
 # def num_check(n):
 #     if ''.join(NUM_) == user_comp:
@@ -40,39 +28,33 @@ NUM_ = [num_w, num_x, num_y, num_z]
 #         sim = [x for x in [*user_comp] if x in NUM_]
 #         if len(sim) > 0:
 
-sample1 = [1, 2, 3, 4]
-sample2 = [0, 2, 0, 4]
 
-def compare(number, guess):
+def compare(numbers, guess):
     cow = 0
     bull = 0
-    for x in range(number):
-        if number[x] == guess[x]:
-            cow+=1
+    for x in numbers:
+        if x in guess:
+            bull+=1
         else:
             pass
-    # if number == guess:
-    #     tally+=1
-    #     return('All cows, correct!')
-    #     return('You guessed' + tally + 'times!')
-    # else:
-    #     if number[z] == guess[z]:
-    #         return ['cow']
-    #         tally+=1
-    #     else:
-    #         for x in list_a and list_b:
-    #             return ['bull']
-    #             tally+=1
-
- 
-    
-    
-
-            
+    return bull
 
 
+    # for x in range(len(numbers)):
+    #     if numbers[x] == guess[x]:
+    #         cow+=1
+    #         #return cow
+        
 
-    
-    
+
+if __name__=="__main__":
+    num_w = str(random.randint(0,9))
+    num_x = str(random.randint(0,9))
+    num_y = str(random.randint(0,9))
+    num_z = str(random.randint(0,9))
+    NUM_ = [num_w, num_x, num_y, num_z]
+    tally = 0
+    pass
+
 
 
