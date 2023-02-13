@@ -13,10 +13,13 @@ def test_compare_ok():
     a = [1, 2, 3, 4]
     b = [3, 2, 4, 3]
     assert compare(a,b) == 3
+    a = [1, 2, 3, 4]
+    b = [5, 6, 7, 8]
+    assert compare(a,b) == 0
 
 def test_compare_fail():
     a = [1, 2, 3, 4]
     b = [3, 6, 8, 7]
-    assert compare(a,b) == ['bull']
+    assert compare(a,b) == 1
     b = [4, 5, 3, 7]
-    assert compare(a,b) == ['bull' , 'cow']
+    assert compare(a,b) == 2

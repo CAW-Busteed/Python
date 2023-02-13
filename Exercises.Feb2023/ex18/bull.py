@@ -34,7 +34,10 @@ def compare(numbers, guess):
     bull = 0
     for x in numbers:
         if x in guess:
-            bull+=1
+            # if guess[x] == numbers[x]:
+            #     cow+=1
+            # else:
+                bull+=1
         else:
             pass
     return bull
@@ -48,13 +51,21 @@ def compare(numbers, guess):
 
 
 if __name__=="__main__":
-    num_w = str(random.randint(0,9))
-    num_x = str(random.randint(0,9))
-    num_y = str(random.randint(0,9))
-    num_z = str(random.randint(0,9))
-    NUM_ = [num_w, num_x, num_y, num_z]
+    NUM_ = [random.randint(0,9), random.randint(0,9), random.randint(0,9), random.randint(0,9)]
     tally = 0
-    pass
+    
+
+    while True:
+            #explanation and start of loop
+            print('A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place.')
+            trial = input('Guess a 4 digit number: ')
+
+            #exit condition
+            if trial == 'quit':
+                break
+            
+            compare(NUM_, trial)
+            pass
 
 
     
