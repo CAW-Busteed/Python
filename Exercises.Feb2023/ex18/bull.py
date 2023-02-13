@@ -14,6 +14,12 @@ generated (n) is array of digits
 import random
 # NUM_ = [random.randint(0,9), random.randint(0,9), random.randint(0,9), random.randint(0,9)]
 
+#TODO find a way to put all these together more efficiently
+num_w = str(random.randint(0,9))
+num_x = str(random.randint(0,9))
+num_y = str(random.randint(0,9))
+num_z = str(random.randint(0,9))
+NUM_ = [num_w, num_x, num_y, num_z]
 
 # 'A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place. Guess 4-digits. '
 # user_comp = input(str(start_mes))
@@ -29,32 +35,15 @@ import random
 #         if len(sim) > 0:
 
 
-def compare(numbers, guess):
-    cow = 0
-    bull = 0
-    for x in numbers:
-        if x in guess:
-            bull+=1
-        else:
-            pass
-    return bull
+def compare(x, y):
+    return 1
+    
+
+            
 
 
-    # for x in range(len(numbers)):
-    #     if numbers[x] == guess[x]:
-    #         cow+=1
-    #         #return cow
-        
 
-
-if __name__=="__main__":
-    num_w = str(random.randint(0,9))
-    num_x = str(random.randint(0,9))
-    num_y = str(random.randint(0,9))
-    num_z = str(random.randint(0,9))
-    NUM_ = [num_w, num_x, num_y, num_z]
-    tally = 0
-    pass
-
+    
+    
 
 
