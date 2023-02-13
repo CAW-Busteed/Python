@@ -32,14 +32,18 @@ import random
 def compare(numbers, guess):
     cow = 0
     bull = 0
-    for x in numbers:
-        if x in guess:
-            # if guess[x] == numbers[x]:
-            #     cow+=1
-            # else:
+    for (i,x) in enumerate(numbers):
+        for (j,y) in enumerate(guess):
+            if i == j and x == y:
+                cow+=1
+                break
+            elif x == y:
                 bull+=1
+                break
+            else:
+                continue
         else:
-            pass
+            continue
     return [bull, cow]
 
 
