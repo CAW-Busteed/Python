@@ -40,8 +40,32 @@ NUM_ = [num_w, num_x, num_y, num_z]
 #         sim = [x for x in [*user_comp] if x in NUM_]
 #         if len(sim) > 0:
 
-def compare(x, y):
-    return 1
+sample1 = [1, 2, 3, 4]
+sample2 = [0, 2, 0, 4]
+
+def compare(number, guess):
+    cow = 0
+    bull = 0
+    for x in range(number):
+        if number[x] == guess[x]:
+            cow+=1
+        else:
+            pass
+    # if number == guess:
+    #     tally+=1
+    #     return('All cows, correct!')
+    #     return('You guessed' + tally + 'times!')
+    # else:
+    #     if number[z] == guess[z]:
+    #         return ['cow']
+    #         tally+=1
+    #     else:
+    #         for x in list_a and list_b:
+    #             return ['bull']
+    #             tally+=1
+
+ 
+    
     
 
             
