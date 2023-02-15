@@ -29,22 +29,54 @@ import random
 #         if len(sim) > 0:
 
 
-def compare(numbers, guess):
-    cow = 0
-    bull = 0
-    for (i,x) in enumerate(numbers):
-        for (j,y) in enumerate(guess):
-            if i == j and x == y:
-                cow+=1
-                break
-            elif x == y:
-                bull+=1
-                break
-            else:
+# def compare(numbers, guess):
+#     cow = 0
+#     bull = 0
+#     for (i,x) in enumerate(numbers):
+#         for (j,y) in enumerate(guess):
+#             if i == j and x == y:
+#                 cow+=1
+#                 break
+#             elif x == y:
+#                 bull+=1
+#                 break
+#             else:
+#                 continue
+#         else:
+#             continue
+#     return [bull, cow]
+
+
+def cowbulls(i, j):
+    def cows_id(i,j):
+        cows = []
+        for x in zip(i, j):
+            if x[0] == x[1]:
+                cows.append(x[0])   
+        return cows
+
+    def not_cows(i,j):
+        notcows = []
+        for x in zip(i,j):
+            if x[0] == x[1]:
                 continue
-        else:
-            continue
-    return [bull, cow]
+            else:
+                notcows.append([x[0], x[1]])
+        return notcows
+
+    def bulls_id(i, j):
+        bulls = [x for x in i if x in j]
+        return bulls
+    
+    cows_ = cows_id(i,j)
+    pbulls_ = not_cows(i,j)
+    pbulls1, pbulls2 = [], []
+    for a,b in pbulls_:
+        pbulls1.append(a)
+        pbulls2.append(b)
+    bulls_ = bulls_id(pbulls1, pbulls2)
+    return [[cows_], [bulls_]]
+
 
 
     # for x in range(len(numbers)):
@@ -68,7 +100,7 @@ if __name__=="__main__":
             if trial == 'quit':
                 break
             
-            compare(NUM_, trial)
+            # compare(NUM_, trial)
             pass
 
 
