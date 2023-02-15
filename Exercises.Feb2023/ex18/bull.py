@@ -56,11 +56,11 @@ if __name__=="__main__":
     # generate a random 4-digit num.
     num_ = [random.randint(0,9), random.randint(0,9), random.randint(0,9), random.randint(0,9)]
     tally = 0 # tally is how many user attempts
-    run = True # flag to terminate main loop.
+    #run = True # flag to terminate main loop.
 
     #explanation and start of loop
     print('A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place.')
-    while run:
+    while True:
             #user input
             ans_ = input('Guess a 4 digit number: ')
 
@@ -81,7 +81,6 @@ if __name__=="__main__":
             print(f'You have {len(count_[0])} cows and {len(count_[1])} bulls.')
 
             if len(count_[0]) == 4:
-                run = False
                 print(f'All cows, you win! You guessed {tally} times')
                 break
             else:
