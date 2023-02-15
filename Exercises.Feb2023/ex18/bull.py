@@ -63,15 +63,9 @@ def cowbulls(i, j):
     bulls_ = bulls_id(pbulls1, pbulls2)
     return [cows_, bulls_]
 
-
-
-    # for x in range(len(numbers)):
-    #     if numbers[x] == guess[x]:
-    #         cow+=1
-    #         #return cow
         
 
-
+#main loop
 if __name__=="__main__":
     NUM_ = [random.randint(0,9), random.randint(0,9), random.randint(0,9), random.randint(0,9)]
     tally = 0
@@ -80,15 +74,17 @@ if __name__=="__main__":
     #explanation and start of loop
     print('A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place.')
     while run:
+            #user input
             ans_ = input('Guess a 4 digit number: ')
 
             #exit condition
             if ans_ == 'quit':
                 break
             
+            #transform input into list
             trial = [int(x) for x in ans_]
 
-            # compare(NUM_, trial)
+            # use cowbulls function to compare
             count_ = cowbulls(NUM_,trial)
 
             #add to tally
