@@ -1,4 +1,3 @@
-from ex18.bull import compare
 from ex18.bull import cowbulls
 
 
