@@ -12,21 +12,7 @@ Keep track of the number of guesses the user makes throughout the game and tell 
 generated (n) is array of digits
 '''
 import random
-# NUM_ = [random.randint(0,9), random.randint(0,9), random.randint(0,9), random.randint(0,9)]
 
-
-# 'A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place. Guess 4-digits. '
-# user_comp = input(str(start_mes))
-
-# def num_check(n):
-#     if ''.join(NUM_) == user_comp:
-#             tally = tally + 1
-#             return('All cows, correct!')
-#             return(tally)
-#     else:
-#         response = []
-#         sim = [x for x in [*user_comp] if x in NUM_]
-#         if len(sim) > 0:
 
 
 # def compare(numbers, guess):
@@ -75,7 +61,7 @@ def cowbulls(i, j):
         pbulls1.append(a)
         pbulls2.append(b)
     bulls_ = bulls_id(pbulls1, pbulls2)
-    return [[cows_], [bulls_]]
+    return [cows_, bulls_]
 
 
 
@@ -89,19 +75,37 @@ def cowbulls(i, j):
 if __name__=="__main__":
     NUM_ = [random.randint(0,9), random.randint(0,9), random.randint(0,9), random.randint(0,9)]
     tally = 0
-    
+    run = True
 
-    while True:
-            #explanation and start of loop
-            print('A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place.')
-            trial = input('Guess a 4 digit number: ')
+    #explanation and start of loop
+    print('A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place.')
+    while run:
+            ans_ = input('Guess a 4 digit number: ')
 
             #exit condition
-            if trial == 'quit':
+            if ans_ == 'quit':
                 break
             
+            trial = [int(x) for x in ans_]
+
             # compare(NUM_, trial)
-            pass
+            count_ = cowbulls(NUM_,trial)
+
+            #add to tally
+            tally+=1
+
+            #tell user their score
+            print(f'You have {len(count_[0])} cows and {len(count_[1])} bulls.')
+
+            if len(count_[0]) == 4:
+                run = False
+                print(f'All cows, you win! You guessed {tally} times')
+                break
+            else:
+                print('Try again!')
+
+
+
 
 
     

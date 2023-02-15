@@ -1,4 +1,4 @@
-ans = [3, 2, 1, 5]
+ans = [1, 2, 5, 7]
 guess = [1, 2, 4, 5]
 
 # for x in zip(ans, guess):
@@ -33,10 +33,11 @@ def cowbulls(i, j):
         pbulls1.append(a)
         pbulls2.append(b)
     bulls_ = bulls_id(pbulls1, pbulls2)
-    return [[cows_], [bulls_]]
+    return [cows_, bulls_]
 
 
 print(cowbulls(ans, guess))
+
 
 # arr = [[1, 2], [3, 4], [5, 6]]
 # l1, l2 = [], []
