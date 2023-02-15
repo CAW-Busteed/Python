@@ -1,7 +1,7 @@
 from ex18.bull import cowbulls
-from ex18.bull import bulls_id
-from ex18.bull import cows_id
-from ex18.bull import not_cows
+from ex18.bull import get_bulls
+from ex18.bull import get_cows
+from ex18.bull import get_not_cows
 
 
 # def test_df():
@@ -15,19 +15,19 @@ def test_cowbulls():
 def test_bulls_id():
     a = [1, 4, 3, 2]
     b = [3, 2, 3, 3]
-    assert bulls_id(a,b) == [3, 2]
+    assert get_bulls(a,b) == [3, 2]
     b = [2, 8, 7, 9]
-    assert bulls_id(a,b) == [2]
+    assert get_bulls(a,b) == [2]
 
 def test_cows_id():
     a = [1, 2, 3, 4]
     b = [3, 2, 3, 3]
-    assert cows_id(a,b) == [2, 3]
+    assert get_cows(a,b) == [2, 3]
 
 def test_not_cows():
     a = [1, 4, 3, 2]
     b = [3, 2, 3, 3]
-    assert not_cows(a,b) == [[1, 3], [4, 2], [2, 3]]
+    assert get_not_cows(a,b) == [[1, 3], [4, 2], [2, 3]]
 
 
 # def test_compare_ok():

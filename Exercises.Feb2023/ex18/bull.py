@@ -14,37 +14,35 @@ generated (n) is array of digits
 import random
 
 
-def cows_id(i,j):
+def get_cows(i,j):
     """
     this function computes the # of cows, returns a list..
     """
     cows = []
-    for x in zip(i, j):
-        if x[0] == x[1]:
-            cows.append(x[0])   
+    for a,b in zip(i, j):
+        if a == b:
+            cows.append(a)   
     return cows
 
-def not_cows(i,j):
+def get_not_cows(i,j):
     notcows = []
-    for x in zip(i,j):
-        if x[0] == x[1]:
-            continue
-        else:
-            notcows.append([x[0], x[1]])
+    for a,b in zip(i,j):
+        if a != b:
+            notcows.append([a, b])
     return notcows
 
-def bulls_id(i, j):
+def get_bulls(i, j):
     bulls = [x for x in i if x in j]
     return bulls
     
 def cowbulls(i, j):
-    cows_ = cows_id(i,j)
-    pbulls_ = not_cows(i,j)
+    cows_ = get_cows(i,j)
+    pbulls_ = get_not_cows(i,j)
     pbulls1, pbulls2 = [], []
     for a,b in pbulls_:
         pbulls1.append(a)
         pbulls2.append(b)
-    bulls_ = bulls_id(pbulls1, pbulls2)
+    bulls_ = get_bulls(pbulls1, pbulls2)
     return [cows_, bulls_]
 
         
