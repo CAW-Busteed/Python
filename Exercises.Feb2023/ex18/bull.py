@@ -13,15 +13,16 @@ generated (n) is array of digits
 '''
 import random
 
+# TODO: rename i, j to a, b in all funcs
 
-def get_cows(i,j):
+def get_cows(a,b):
     """
     this function computes the # of cows, returns a list..
     """
     cows = []
-    for a,b in zip(i, j):
-        if a == b:
-            cows.append(a)   
+    for i, j in zip(a, b):
+        if i == j:
+            cows.append(i)   
     return cows
 
 def get_not_cows(i,j):
@@ -35,13 +36,16 @@ def get_bulls(i, j):
     bulls = [x for x in i if x in j]
     return bulls
     
-def cowbulls(i, j):
-    cows_ = get_cows(i,j)
-    pbulls_ = get_not_cows(i,j)
+def cowbulls(a, b):
+    cows_ = get_cows(a,b)
+    pbulls_ = get_not_cows(a,b)
+
+    # transpose a matrix
     pbulls1, pbulls2 = [], []
-    for a,b in pbulls_:
-        pbulls1.append(a)
-        pbulls2.append(b)
+    for _a,_b in pbulls_:
+        pbulls1.append(_a)
+        pbulls2.append(_b)
+
     bulls_ = get_bulls(pbulls1, pbulls2)
     return [cows_, bulls_]
 
@@ -49,9 +53,10 @@ def cowbulls(i, j):
 
 #main loop
 if __name__=="__main__":
-    NUM_ = [random.randint(0,9), random.randint(0,9), random.randint(0,9), random.randint(0,9)]
-    tally = 0
-    run = True
+    # generate a random 4-digit num.
+    num_ = [random.randint(0,9), random.randint(0,9), random.randint(0,9), random.randint(0,9)]
+    tally = 0 # tally is how many user attempts
+    run = True # flag to terminate main loop.
 
     #explanation and start of loop
     print('A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place.')
@@ -67,7 +72,7 @@ if __name__=="__main__":
             trial = [int(x) for x in ans_]
 
             # use cowbulls function to compare
-            count_ = cowbulls(NUM_,trial)
+            count_ = cowbulls(num_,trial)
 
             #add to tally
             tally+=1

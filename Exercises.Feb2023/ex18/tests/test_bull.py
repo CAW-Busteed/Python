@@ -12,19 +12,19 @@ def test_cowbulls():
     b = [4, 2, 3, 3]
     assert cowbulls(a,b) == [[2, 3], [4]]
 
-def test_bulls_id():
+def test_get_bulls():
     a = [1, 4, 3, 2]
     b = [3, 2, 3, 3]
     assert get_bulls(a,b) == [3, 2]
     b = [2, 8, 7, 9]
     assert get_bulls(a,b) == [2]
 
-def test_cows_id():
+def test_get_cows():
     a = [1, 2, 3, 4]
     b = [3, 2, 3, 3]
     assert get_cows(a,b) == [2, 3]
 
-def test_not_cows():
+def test_get_not_cows():
     a = [1, 4, 3, 2]
     b = [3, 2, 3, 3]
     assert get_not_cows(a,b) == [[1, 3], [4, 2], [2, 3]]
