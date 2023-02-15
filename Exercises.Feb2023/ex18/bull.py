@@ -14,46 +14,30 @@ generated (n) is array of digits
 import random
 
 
+def cows_id(i,j):
+    """
+    this function computes the # of cows, returns a list..
+    """
+    cows = []
+    for x in zip(i, j):
+        if x[0] == x[1]:
+            cows.append(x[0])   
+    return cows
 
-# def compare(numbers, guess):
-#     cow = 0
-#     bull = 0
-#     for (i,x) in enumerate(numbers):
-#         for (j,y) in enumerate(guess):
-#             if i == j and x == y:
-#                 cow+=1
-#                 break
-#             elif x == y:
-#                 bull+=1
-#                 break
-#             else:
-#                 continue
-#         else:
-#             continue
-#     return [bull, cow]
+def not_cows(i,j):
+    notcows = []
+    for x in zip(i,j):
+        if x[0] == x[1]:
+            continue
+        else:
+            notcows.append([x[0], x[1]])
+    return notcows
 
-
-def cowbulls(i, j):
-    def cows_id(i,j):
-        cows = []
-        for x in zip(i, j):
-            if x[0] == x[1]:
-                cows.append(x[0])   
-        return cows
-
-    def not_cows(i,j):
-        notcows = []
-        for x in zip(i,j):
-            if x[0] == x[1]:
-                continue
-            else:
-                notcows.append([x[0], x[1]])
-        return notcows
-
-    def bulls_id(i, j):
-        bulls = [x for x in i if x in j]
-        return bulls
+def bulls_id(i, j):
+    bulls = [x for x in i if x in j]
+    return bulls
     
+def cowbulls(i, j):
     cows_ = cows_id(i,j)
     pbulls_ = not_cows(i,j)
     pbulls1, pbulls2 = [], []
