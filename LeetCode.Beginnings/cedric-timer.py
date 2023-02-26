@@ -1,14 +1,14 @@
 import time
+import mysum0
 
 
 def f(a, b):
     """Print the latest tutorial from Real Python"""
-    t0 = time.perf_counter()
-    for i in range(10**7):
-        # c = a + b
-        c = sum([a, b])
-    t1 = time.perf_counter()
-    print(f'it took: {t1 - t0} secs')
+    t0 = time.perf_counter_ns()
+    mysum0.add(a, b)
+    # mysum0.subtract(a, b)
+    t1 = time.perf_counter_ns()
+    print(f'it took: {t1 - t0} nano-secs')
 
 
 if "__main__" == __name__:
