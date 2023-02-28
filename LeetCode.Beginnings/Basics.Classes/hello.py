@@ -1,4 +1,4 @@
-class Hello():
+class Hello:
 
     def __init__(self, name, age=24):
         self.name = name
