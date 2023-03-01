@@ -7,8 +7,7 @@ def pull_rans(magazine, ransom):
             mdict[e] = 1
         else:
             mdict[e] = mdict[e] + 1
-
-    
+            
     for e in ransom:
         if e not in mdict:
             return False
