@@ -1,4 +1,4 @@
-from least_common_prefix.lcp import get_lcp, get_lcp_v2
+from lcp.lcp import get_lcp, get_lcp_v2
 
 
 def test_get_lcp():
