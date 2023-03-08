@@ -1,7 +1,12 @@
-from ex18.bull import get_cows_and_bulls
+from ex18_v2.bull import get_cowandbull
 
 
 def test_get_cowandbull():
-    a = [1, 2, 3, 4]
-    b = [3, 2, 3, 3]
-    assert get_cows_and_bulls(a, b) == ([2, 3], [[1, 4], [3, 3]])
+    a = enumerate([1, 2, 3, 4])
+    b = enumerate([1, 2, 3, 5])
+    assert get_cowandbull(a, b) == ['cow', 'cow', 'cow']
+
+def test_get_cowandbull2():
+    a = enumerate([1,2,2,4])
+    b = enumerate([1,2,3,4])
+    assert get_cowandbull(a, b) == ['cow', 'cow', 'cow']

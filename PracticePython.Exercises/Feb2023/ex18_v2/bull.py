@@ -13,13 +13,6 @@ for each number(i,n) in generated_list:
            we have a bull; break # handle next outer elem
         else:
            do nothing; next elem # continue
-
-        # if n == m:
-        #     if i == j:
-        #         add 'cow' to bullscows
-        #         break
-        #     add 'bull' to bullscows
-            break
 return bullscows
 
 
@@ -41,14 +34,18 @@ def get_cowandbull(gen, input):
     c_and_b = []
     for x, i in gen:
         for y, j in input:
-            if x == y:
-                if i == j:
-                    c_and_b.append('cow')
-                    break
+            #TODO: rectify flaw where repeating numbers can be counted as bulls rather than a single cow
+            if x == y and i == j:
+                c_and_b.append('cow')
+                break
+            elif i == j:
                 c_and_b.append('bull')
                 break
     return c_and_b
 
+gen1 = enumerate([1,2,3,4])
+input1 = enumerate([1, 2, 3, 5])
+print(get_cowandbull(gen1,input1))
 
 if __name__ == "__main__":
     generated_num = [
