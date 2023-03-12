@@ -1,37 +1,31 @@
 '''
 To get cows & bulls
 
-bullscows <- [] 
 gen <- [A,B,C,D]
 input <- [a,b,c,d]
-gen2 <-[]
-input2 <-[]
-input_flag <- [true,true,true,true]
 
+reduced_gen = []  # holding array for computing bulls
+reduced_input = []  # holding array#2 for computing bulls
 
+flags = [] # for computing bulls
+c_and_b = []  # result array
+
+# compute cows; get reduced array for computing bulls
 for index and value in enumerated gen
     if value = input[index]:
-        add 'cow' to bullscows
+        add 'cow' to c_and_b
     else: 
-        #add values to gen2 and input2
-        add value to gen2
-        add input[index] to input2
+        #add values to reduced_gen and reduced_input
+        add value to reduced_gen
+        add input[index] to reduced_input
         
-for identical value in gen2 and input2
-for x in gen2 and input2:
-    add 'bull' to bullscows
-
-Or...
-create a flag1 array as long as length of input2
+# compute bulls from reduced array
+create a flag1 array as long as length of reduced_input
 for x in gen):
-    for i, y in enumerate(input2):
+    for i, y in enumerate(reduced_input):
         if x=y and flag[i] = True:
-            add 'bull' to bullscows
+            add 'bull' to c_and_b
             flag[i] = false
-
-
-
-
 
 introduce main loop
     generate a random 4 digit number
@@ -47,43 +41,31 @@ import random
 
 # To get cows & bulls:
 def get_cowandbull(gen, input):
-    c_and_b = []
-    reduced_gen = []
-    reduced_input = []
-    flag =[]
+    c_and_b = []  # result array
+    reduced_gen = []  # holding array for computing bulls
+    reduced_input = []  # holding array#2 for computing bulls
+    flags = []
 
-    # for index and value in gen
+    # first we compute cows (because cows > bulls)
     for i, x in enumerate(gen):
-            #if value = input[index]:
-            if x == input[i]:
+        if x == input[i]:
+            c_and_b.append('cow')
+        else:
+            reduced_gen.append(x)
+            reduced_input.append(input[i])
 
-                #add 'cow' to bullscows
-                c_and_b.append('cow')
-
-                # add value of gen to reduced_gen
-                # add value of input to reduced_input
-            else:
-                reduced_gen.append(x)
-                reduced_input.append(input[i])
-
-    #create a flag1 array as long as length of input2 for x in gen):
+    # create a boolean array to mark elements in input that have already been considered
     for x in reduced_input:
-        flag.append(True)
-  
-    # for identical value in copy_gen and copy_input:
+        flags.append(True)
+
+    # for identical value in reduced_gen and reduced_input:
     for x in reduced_gen:
-
-        # for i, y in enumerate(input2):
-        for i,y in enumerate(reduced_input):
-
-            #if x=y and flag[i] = True:
-            if x==y and flag[i]==True:
-                #add 'bull' to bullscows
+        for i, y in enumerate(reduced_input):
+            if x == y and flags[i] == True:
                 c_and_b.append('bull')
-                flag[i]=False
-   
-    return c_and_b
+                flags[i] = False
 
+    return c_and_b
 
 
 # if __name__ == "__main__":
