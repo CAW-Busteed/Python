@@ -6,6 +6,10 @@ def test_get_allcows():
     b = [1, 2, 3, 4]
     assert get_cowandbull(a, b) == ['cow', 'cow', 'cow', 'cow']
 
+def test_get_cowsandbulls():
+    a = [1, 4, 3, 2]
+    b = [1, 2, 3, 4]
+    assert get_cowandbull(a, b) == ['cow', 'cow', 'bull', 'bull']
 
 def test_get_some_cows():
     a = [1, 2, 2, 4]
