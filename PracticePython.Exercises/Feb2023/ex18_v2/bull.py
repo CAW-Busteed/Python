@@ -50,41 +50,41 @@ def get_cowandbull(gen, input):
     c_and_b = []
     reduced_gen = []
     reduced_input = []
+    flag =[]
 
     # for index and value in gen
-    for x, i in gen:
-
-        #compare to input
-        for y, j in input:
-
-            #if input's index = gen's index, and input's value = gen's value:
-            if x == y and i == j:
+    for i, x in enumerate(gen):
+            #if value = input[index]:
+            if x == input[i]:
 
                 #add 'cow' to bullscows
                 c_and_b.append('cow')
-            
-            # add value of gen to reduced_gen
-            # add value of input to reduced_input
+
+                # add value of gen to reduced_gen
+                # add value of input to reduced_input
             else:
-                reduced_gen.append(i)
-                reduced_input.append(j)
+                reduced_gen.append(x)
+                reduced_input.append(input[i])
 
-               
-
+    #create a flag1 array as long as length of input2 for x in gen):
+    for x in reduced_input:
+        flag.append(True)
+  
     # for identical value in copy_gen and copy_input:
-    for x,i in gen:
-        for y,j in input:
-            if i==j:
+    for x in reduced_gen:
+
+        # for i, y in enumerate(input2):
+        for i,y in enumerate(reduced_input):
+
+            #if x=y and flag[i] = True:
+            if x==y and flag[i]==True:
                 #add 'bull' to bullscows
                 c_and_b.append('bull')
-
-               
-            
+                flag[i]=False
+   
     return c_and_b
 
-gen1 = enumerate([1,2,3,4])
-input1 = enumerate([1,2,2,4])
-print(get_cowandbull(gen1,input1))
+
 
 # if __name__ == "__main__":
 #     generated_num = [
