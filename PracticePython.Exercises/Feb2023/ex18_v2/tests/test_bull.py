@@ -10,3 +10,13 @@ def test_get_cowandbull2():
     a = enumerate([1,2,2,4])
     b = enumerate([1,2,3,4])
     assert get_cowandbull(a, b) == ['cow', 'cow', 'cow']
+
+def test_get_cowandbull3():
+    a = enumerate([1,2,2,4])
+    b = enumerate([1,2,3,4])
+    assert get_cowandbull(b, a) == ['cow', 'cow', 'cow']
+
+def test_get_cowandbull4():
+    a = enumerate([2,2,2,2])
+    b = enumerate([1,2,3,4])
+    assert get_cowandbull(a,b) == ['cow']
