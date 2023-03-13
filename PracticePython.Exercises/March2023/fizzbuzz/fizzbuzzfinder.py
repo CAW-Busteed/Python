@@ -2,8 +2,7 @@
 
 For a number in a set range (1-100):
 	If the number is divisible by 15, add ‘fizzbuzz’ to fizzbuzz
-	else:
-If the number is divisible by 3, add ‘fizz’ to fizzbuzz
+        If the number is divisible by 3, add ‘fizz’ to fizzbuzz
 		If the number is divisible by 5, add ‘buzz’ to fizzbuzz'''
 
 
