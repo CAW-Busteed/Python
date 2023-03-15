@@ -4,7 +4,7 @@ class Treenode:
         self.data = data
         self.children = []
         self.parent = None
-    
+
     def add_child(self, child):
         child.parent = self
         self.children.append(child)
@@ -20,12 +20,15 @@ class Treenode:
         return level
 
     # And if I want to print it, it can be done recursively to return all leaves
-    def print_tree(self):
-        prefix = ' ' * self.get_level() * 3 #can multiply number of spaces to make it more indented
-        print(prefix + self.data)
-        if self.children:   #if len(self.children) > 0:
+    def print_tree(self, result=[]):
+        prefix = ' ' * self.get_level(
+        ) * 3  #can multiply number of spaces to make it more indented
+        result.append(prefix + self.data)
+        # print(prefix + self.data)
+        if self.children:  #if len(self.children) > 0:
             for child in self.children:
-                child.print_tree()
+                child.print_tree(result)
+
 
 def build_mythos_tree():
     root = Treenode("Arbora")
@@ -34,7 +37,7 @@ def build_mythos_tree():
     telves.add_child(Treenode('High Elves'))
     telves.add_child(Treenode('Lesser Elves'))
     telves.add_child(Treenode('Terran Elves'))
-    
+
     kidu = Treenode("Kidu")
     kidu.add_child(telves)
 
@@ -83,6 +86,14 @@ def build_mythos_tree():
     root.add_child(fen)
     root.add_child(skorm)
 
-    root.print_tree()
+    return root
 
-build_mythos_tree()
+
+if "__main__" == __name__:
+    root = build_mythos_tree()
+    myresult = []
+    root.print_tree(myresult)
+
+    # print("\n".join(myresult))
+    for elem in myresult:
+        print(elem)
