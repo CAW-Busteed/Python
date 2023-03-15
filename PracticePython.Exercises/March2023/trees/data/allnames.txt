@@ -1,0 +1,40 @@
+
+
+Arbora
+   Kidu
+      True Elves
+         High Elves
+         Lesser Elves
+         Terran Elves
+   Nai
+      Dryads
+   Glish
+      Dwarves
+   Jick
+      Dohremi
+         Fathume
+         Sorreleta
+         Lalrek
+         Tipenum
+         Fashal
+         Solmm
+         Lafey
+         Tikeep
+         Famoki
+         Soushek
+         Larach
+         Ti
+   Ord
+      Titans
+      Goliaths
+   Fen
+      Fairies
+      Argites
+   Skorm
+      Billipedes
+      Glak
+      Gluk
+      Orcum
+
+
+
