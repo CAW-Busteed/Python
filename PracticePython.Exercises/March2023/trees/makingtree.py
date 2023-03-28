@@ -1,3 +1,5 @@
+import os.path
+
 class Treenode:
     #these functions set up how to make a tree
     def __init__(self, data):
@@ -28,6 +30,22 @@ class Treenode:
         if self.children:  #if len(self.children) > 0:
             for child in self.children:
                 child.print_tree(result)
+
+
+def identify_treelevel(line):
+    # for line in string:      #open(f'{os.path.dirname(__file__)}\\allnames.txt').readlines()
+    line = line.rstrip()
+    if not line: 
+        return None
+    if line.startswith('         '):
+        return[3, line.strip()]
+    elif line.startswith('      '):
+        return[2, line.strip()]
+    elif line.startswith('   '):
+        return[1, line.strip()]
+    else:
+        return [0,line]
+
 
 
 def build_mythos_tree():
@@ -97,3 +115,5 @@ if "__main__" == __name__:
     # print("\n".join(myresult))
     for elem in myresult:
         print(elem)
+
+
