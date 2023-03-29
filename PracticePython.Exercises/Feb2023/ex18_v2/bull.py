@@ -68,16 +68,61 @@ def get_cowandbull(gen, input):
     return c_and_b
 
 
-# if __name__ == "__main__":
-#     generated_num = [
-#         random.int(0, 9),
-#         random.int(0, 9),
-#         random.int(0, 9),
-#         random.int(0, 9)
-#     ]
+def moo_count(x):
+    for bovine in x:
+        cows = 0
+        bulls = 0
+        if bovine == 'cow':
+            cows+=1
+        elif bovine == 'bull':
+            bulls+=1
+        moo = [cows, bulls]
+    return moo
 
-#     print(
-#         'A cow means a correct placement and correct number. Bull just means a correct number'
-#     )
-#     answer = input()
-#     [int(x) for x in answer]
+if __name__ == "__main__":
+    generated_num = [
+        random.int(0, 9),
+        random.int(0, 9),
+        random.int(0, 9),
+        random.int(0, 9)
+    ]
+
+    tally = 0  # tally is how many user attempts
+    
+    #run = True # flag to terminate main loop.
+
+    #explanation and start of loop
+    print(
+        'A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place.'
+    )
+    while True:
+        #user input
+        ans_ = input('Guess a 4 digit number: ')
+
+        #exit condition
+        if ans_ == 'quit':
+            break
+
+        #transform input into list
+        trial = [int(x) for x in ans_]
+
+        # use cowbulls function to compare
+        count_ = get_cowandbull(generated_num, trial)
+
+        #add to tally
+        tally += 1
+
+        bovine = moo_count(count_)
+
+        print(f'You have {len(bovine[0])} cows and {len(bovine[1])} bulls.')
+
+        if len(bovine[0]) == 4:
+            print(f'All cows, you win! You guessed {tally} times')
+            break
+        else:
+            print('Try again!')
+
+        
+
+
+
