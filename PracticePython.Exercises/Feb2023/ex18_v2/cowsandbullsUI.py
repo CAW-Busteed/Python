@@ -49,12 +49,14 @@ def main():
     while run:
         clock.tick(60)
         count = 0
+        user_input = []
 
         for event in pg.event.get():
             if count == 4:
                 #TODO: this is where we add in the bull.py
                 break
-
+                #TODO: find out why there's a latency, and why adding an update to the screen 
+                # after each key doesn't allow it to move to the next box
             elif event.type == pg.QUIT:
                 run = False
             elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
@@ -62,34 +64,45 @@ def main():
             elif event.type == pg.KEYDOWN and event.key == pg.K_0:
                 center_num('0', rect_side, count)
                 count+=1
+                user_input.append(0)
             elif event.type == pg.KEYDOWN and event.key == pg.K_1:
                 center_num('1', rect_side, count)
                 count+=1
+                user_input.append(1)
             elif event.type == pg.KEYDOWN and event.key == pg.K_2:
                 center_num('2', rect_side, count)
                 count+=1
+                user_input.append(2)
             elif event.type == pg.KEYDOWN and event.key == pg.K_3:
                 center_num('3', rect_side, count)
                 count+=1
+                user_input.append(3)
             elif event.type == pg.KEYDOWN and event.key == pg.K_4:
                 center_num('4', rect_side, count)
                 count+=1
+                user_input.append(4)
             elif event.type == pg.KEYDOWN and event.key == pg.K_5:
                 center_num('5', rect_side, count)
                 count+=1
+                user_input.append(5)
             elif event.type == pg.KEYDOWN and event.key == pg.K_6:
                 center_num('6', rect_side, count)
                 count+=1
+                user_input.append(6)
             elif event.type == pg.KEYDOWN and event.key == pg.K_7:
                 center_num('7', rect_side, count)
                 count+=1
+                user_input.append(7)
             elif event.type == pg.KEYDOWN and event.key == pg.K_8:
                 center_num('8', rect_side, count)
                 count+=1
+                user_input.append(8)
             elif event.type == pg.KEYDOWN and event.key == pg.K_9:
                 center_num('9', rect_side, count)
                 count+=1
-    
+                user_input.append(9)
+        #this is the reason for latency, but without it, it just overwrites
+        #TODO: find a solution to allow user pauses to type
         time.sleep(5)
         
         
