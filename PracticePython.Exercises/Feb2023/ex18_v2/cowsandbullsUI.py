@@ -10,13 +10,13 @@ SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 800
 
 def main():
-    def center_num(input, length):
+    def center_num(input, length, tally):
         if pg.font:
             font = pg.font.Font(None, length)
             text = font.render(input, True, (10, 10, 10))
             #transform font by half of its size from the midpoint of the rect
             #TODO: make the rest of the numbers in squares, maybe as a function
-            textpos = (100+ (length//2) -(font.size(input)[0]//2)), (100+ (length//2) -(font.size(input)[1]//2)) 
+            textpos = ((tally*300)+100)+ (length//2) -(font.size(input)[0]//2), (100+ (length//2) -(font.size(input)[1]//2)) 
             #, (400,100), (700,100), (1000,100)
             #text.get_rect(centerx=screen.get_width() / 2, y=10)
             screen.blit(text, textpos)
@@ -48,34 +48,48 @@ def main():
 
     while run:
         clock.tick(60)
+        count = 0
 
         for event in pg.event.get():
-            if event.type == pg.QUIT:
+            if count == 4:
+                #TODO: this is where we add in the bull.py
+                break
+
+            elif event.type == pg.QUIT:
                 run = False
             elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 run = False
             elif event.type == pg.KEYDOWN and event.key == pg.K_0:
-                center_num('0', rect_side)
+                center_num('0', rect_side, count)
+                count+=1
             elif event.type == pg.KEYDOWN and event.key == pg.K_1:
-                center_num('1', rect_side)
+                center_num('1', rect_side, count)
+                count+=1
             elif event.type == pg.KEYDOWN and event.key == pg.K_2:
-                center_num('2', rect_side)
+                center_num('2', rect_side, count)
+                count+=1
             elif event.type == pg.KEYDOWN and event.key == pg.K_3:
-                center_num('3', rect_side)
+                center_num('3', rect_side, count)
+                count+=1
             elif event.type == pg.KEYDOWN and event.key == pg.K_4:
-                center_num('4', rect_side)
+                center_num('4', rect_side, count)
+                count+=1
             elif event.type == pg.KEYDOWN and event.key == pg.K_5:
-                center_num('5', rect_side)
+                center_num('5', rect_side, count)
+                count+=1
             elif event.type == pg.KEYDOWN and event.key == pg.K_6:
-                center_num('6', rect_side)
+                center_num('6', rect_side, count)
+                count+=1
             elif event.type == pg.KEYDOWN and event.key == pg.K_7:
-                center_num('7', rect_side)
+                center_num('7', rect_side, count)
+                count+=1
             elif event.type == pg.KEYDOWN and event.key == pg.K_8:
-                center_num('8', rect_side)
+                center_num('8', rect_side, count)
+                count+=1
             elif event.type == pg.KEYDOWN and event.key == pg.K_9:
-                center_num('9', rect_side)
-            else:
-                center_num('X', rect_side)
+                center_num('9', rect_side, count)
+                count+=1
+    
         time.sleep(5)
         
         
