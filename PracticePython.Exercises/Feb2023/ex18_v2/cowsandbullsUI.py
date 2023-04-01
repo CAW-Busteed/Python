@@ -9,7 +9,12 @@ import time
 SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 800
 
+input = None
+count = 0
+user_input = []
+
 def main():
+    run = True
     def center_num(input, length, tally):
         if pg.font:
             font = pg.font.Font(None, length)
@@ -23,7 +28,8 @@ def main():
             pg.display.flip()
 
     def init_num(digit):
-        center_num(digit, rect_side, count)
+        global count
+        center_num(str(digit), rect_side, count)
         count+=1
         user_input.append(digit)    
 
@@ -47,10 +53,7 @@ def main():
     
 
     #TODO:collate the bulls program to connect results to 4 squares
-    run = True
-    input = None
-    count = 0
-    user_input = []
+    
     
     while run:
         clock.tick(60)
