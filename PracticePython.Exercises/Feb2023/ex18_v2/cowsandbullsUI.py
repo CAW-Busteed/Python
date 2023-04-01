@@ -21,7 +21,11 @@ def main():
             #text.get_rect(centerx=screen.get_width() / 2, y=10)
             screen.blit(text, textpos)
             pg.display.flip()
-            
+
+    def init_num(digit):
+        center_num(digit, rect_side, count)
+        count+=1
+        user_input.append(digit)    
 
     pg.init()
     # set up a dark green screen with caption
@@ -68,47 +72,28 @@ def main():
             elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 run = False
             elif event.type == pg.KEYDOWN and event.key == pg.K_0:
-                center_num('0', rect_side, count)
-                count+=1
-                user_input.append(0)
+                init_num(0)
             elif event.type == pg.KEYDOWN and event.key == pg.K_1:
-                center_num('1', rect_side, count)
-                count+=1
-                user_input.append(1)
+                init_num(1)
             elif event.type == pg.KEYDOWN and event.key == pg.K_2:
-                center_num('2', rect_side, count)
-                count+=1
-                user_input.append(2)
+                init_num(2)
             elif event.type == pg.KEYDOWN and event.key == pg.K_3:
-                center_num('3', rect_side, count)
-                count+=1
-                user_input.append(3)
+                init_num(3)
             elif event.type == pg.KEYDOWN and event.key == pg.K_4:
-                center_num('4', rect_side, count)
-                count+=1
-                user_input.append(4)
+                init_num(4)
             elif event.type == pg.KEYDOWN and event.key == pg.K_5:
-                center_num('5', rect_side, count)
-                count+=1
-                user_input.append(5)
+                init_num(5)
             elif event.type == pg.KEYDOWN and event.key == pg.K_6:
-                center_num('6', rect_side, count)
-                count+=1
-                user_input.append(6)
+                init_num(6)
             elif event.type == pg.KEYDOWN and event.key == pg.K_7:
-                center_num('7', rect_side, count)
-                count+=1
-                user_input.append(7)
+                init_num(7)
             elif event.type == pg.KEYDOWN and event.key == pg.K_8:
-                center_num('8', rect_side, count)
-                count+=1
-                user_input.append(8)
+                init_num(8)
             elif event.type == pg.KEYDOWN and event.key == pg.K_9:
-                center_num('9', rect_side, count)
-                count+=1
-                user_input.append(9)
+                init_num(9)
             elif event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
-                
+                pass
+
         #this is the reason for latency, but without it, it just overwrites
         #TODO: find a solution to allow user pauses to type
         
