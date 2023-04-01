@@ -45,18 +45,24 @@ def main():
     #TODO:collate the bulls program to connect results to 4 squares
     run = True
     input = None
-
+    count = 0
+    user_input = []
+    
     while run:
         clock.tick(60)
-        count = 0
-        user_input = []
+
 
         for event in pg.event.get():
             if count == 4:
+                if event.type == pg.QUIT:
+                    run = False
+                elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
+                    run = False
                 #TODO: this is where we add in the bull.py
-                break
                 #TODO: find out why there's a latency, and why adding an update to the screen 
                 # after each key doesn't allow it to move to the next box
+                time.sleep(5)
+                run=False
             elif event.type == pg.QUIT:
                 run = False
             elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
@@ -101,9 +107,11 @@ def main():
                 center_num('9', rect_side, count)
                 count+=1
                 user_input.append(9)
+            elif event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
+                
         #this is the reason for latency, but without it, it just overwrites
         #TODO: find a solution to allow user pauses to type
-        time.sleep(5)
+        
         
         
         

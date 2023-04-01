@@ -79,7 +79,7 @@ def moo_count(x):
         moo = [cows, bulls]
     return moo
 
-if __name__ == "__main__":
+def cows_and_bulls_main(user_res):
     generated_num = [
         random.int(0, 9),
         random.int(0, 9),
@@ -92,12 +92,12 @@ if __name__ == "__main__":
     #run = True # flag to terminate main loop.
 
     #explanation and start of loop
-    print(
-        'A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place.'
-    )
+    # print(
+    #     'A return of a cow means a correct number and correct place. A bull is a correct guess in the wrong place.'
+    # )
     while True:
         #user input
-        ans_ = input('Guess a 4 digit number: ')
+        ans_ = user_res
 
         #exit condition
         if ans_ == 'quit':
@@ -123,6 +123,8 @@ if __name__ == "__main__":
             print('Try again!')
 
         
-
+if __name__ == "__main__":
+    res = input('Guess 4 digits')
+    cows_and_bulls_main(res)
 
 
