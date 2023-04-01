@@ -10,28 +10,29 @@ SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 800
 
 input = None
-count = 0
 user_input = []
 
 def main():
     run = True
-    def center_num(input, length, tally):
+
+    def center_num(input):
         if pg.font:
-            font = pg.font.Font(None, length)
-            text = font.render(input, True, (10, 10, 10))
-            #transform font by half of its size from the midpoint of the rect
-            #TODO: make the rest of the numbers in squares, maybe as a function
-            textpos = ((tally*300)+100)+ (length//2) -(font.size(input)[0]//2), (100+ (length//2) -(font.size(input)[1]//2)) 
-            #, (400,100), (700,100), (1000,100)
-            #text.get_rect(centerx=screen.get_width() / 2, y=10)
+            response = enumerate(input)
+            font = pg.font.Font(None, rect_side)
+            for position, integer in response:
+                text = font.render(str(integer), True, (10, 10, 10))
+
+                #transform font by half of its size from the midpoint of the rect
+                textpos = ((position*300)+100)+ (rect_side//2) -((font.size(str(integer))[0])//2), (100+ (rect_side//2)) -((font.size(str(integer))[1])//2) 
+            
+
             screen.blit(text, textpos)
             pg.display.flip()
 
     def init_num(digit):
-        global count
-        center_num(str(digit), rect_side, count)
-        count+=1
-        user_input.append(digit)    
+        user_input.append(digit)  
+        center_num(user_input)
+          
 
     pg.init()
     # set up a dark green screen with caption
@@ -60,16 +61,13 @@ def main():
 
 
         for event in pg.event.get():
-            if count == 4:
+            if len(user_input) == 4:
                 if event.type == pg.QUIT:
                     run = False
                 elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                     run = False
                 #TODO: this is where we add in the bull.py
-                #TODO: find out why there's a latency, and why adding an update to the screen 
-                # after each key doesn't allow it to move to the next box
-                time.sleep(5)
-                run=False
+                
             elif event.type == pg.QUIT:
                 run = False
             elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
@@ -96,9 +94,6 @@ def main():
                 init_num(9)
             elif event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
                 pass
-
-        #this is the reason for latency, but without it, it just overwrites
-        #TODO: find a solution to allow user pauses to type
         
         
         
