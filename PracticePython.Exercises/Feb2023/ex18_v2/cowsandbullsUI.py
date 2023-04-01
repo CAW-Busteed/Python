@@ -51,9 +51,18 @@ def center_num():
         text = font.render(str(integer), True, (10, 10, 10))
 
         #transform font by half of its size from the midpoint of the rect
-        textpos = ((position * 300) + 100) + (rect_side // 2) - (
-            (font.size(str(integer))[0]) // 2), (100 + (rect_side // 2)) - (
-                (font.size(str(integer))[1]) // 2)
+        
+        border = 100
+        square_midpoint_width = (rect_side // 2)
+        shift_x = position*300
+        digit_width = (font.size(str(integer))[0])
+        digit_height = (font.size(str(integer))[1])
+
+        textpos_x =shift_x + border + square_midpoint_width - digit_width // 2
+        textpos_y = border + square_midpoint_width - digit_height//2
+
+        textpos = textpos_x, textpos_y
+        
 
         screen.blit(text, textpos)
         pg.display.flip()
