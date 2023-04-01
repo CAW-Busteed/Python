@@ -16,7 +16,6 @@ def main():
     run = True
 
     def center_num(input):
-        user_input.append(input) 
         if pg.font:
             response = enumerate(input)
             font = pg.font.Font(None, rect_side)
@@ -30,6 +29,9 @@ def main():
             screen.blit(text, textpos)
             pg.display.flip()
 
+    def init_num(digit):
+        user_input.append(digit)  
+        center_num(user_input)
           
 
     pg.init()
@@ -65,31 +67,30 @@ def main():
                 elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                     run = False
                 #TODO: this is where we add in the bull.py
-
             elif event.type == pg.QUIT:
                 run = False
             elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 run = False
             elif event.type == pg.KEYDOWN and event.key == pg.K_0:
-                center_num(0)
+                init_num(0)
             elif event.type == pg.KEYDOWN and event.key == pg.K_1:
-                center_num(1)
+                init_num(1)
             elif event.type == pg.KEYDOWN and event.key == pg.K_2:
-                center_num(2)
+                init_num(2)
             elif event.type == pg.KEYDOWN and event.key == pg.K_3:
-                center_num(3)
+                init_num(3)
             elif event.type == pg.KEYDOWN and event.key == pg.K_4:
-                center_num(4)
+                init_num(4)
             elif event.type == pg.KEYDOWN and event.key == pg.K_5:
-                center_num(5)
+                init_num(5)
             elif event.type == pg.KEYDOWN and event.key == pg.K_6:
-                center_num(6)
+                init_num(6)
             elif event.type == pg.KEYDOWN and event.key == pg.K_7:
-                center_num(7)
+                init_num(7)
             elif event.type == pg.KEYDOWN and event.key == pg.K_8:
-                center_num(8)
+                init_num(8)
             elif event.type == pg.KEYDOWN and event.key == pg.K_9:
-                center_num(9)
+                init_num(9)
             elif event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
                 pass
         
