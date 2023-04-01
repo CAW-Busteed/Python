@@ -15,24 +15,36 @@ user_input = []
 def main():
     run = True
 
+    def screen_reset():
+        screen.fill((126,200,80))
+        pg.draw.rect(screen, (0,0,0), (100, 100, rect_side, rect_side), 4)
+        pg.draw.rect(screen, (0,0,0), (400, 100, rect_side, rect_side), 4)
+        pg.draw.rect(screen, (0,0,0), (700, 100, rect_side, rect_side), 4)
+        pg.draw.rect(screen, (0,0,0), (1000, 100, rect_side, rect_side), 4)
+
+        #updates screen
+        pg.display.flip()
+
     def center_num(input):
-        if pg.font:
-            response = enumerate(input)
-            font = pg.font.Font(None, rect_side)
-            for position, integer in response:
-                text = font.render(str(integer), True, (10, 10, 10))
-
-                #transform font by half of its size from the midpoint of the rect
-                textpos = ((position*300)+100)+ (rect_side//2) -((font.size(str(integer))[0])//2), (100+ (rect_side//2)) -((font.size(str(integer))[1])//2) 
+        screen_reset()
+        response = enumerate(input)
+        font = pg.font.Font(None, rect_side)
+        for position, integer in response:
             
+            text = font.render(str(integer), True, (10, 10, 10))
 
+            #transform font by half of its size from the midpoint of the rect
+            textpos = ((position*300)+100)+ (rect_side//2) -((font.size(str(integer))[0])//2), (100+ (rect_side//2)) -((font.size(str(integer))[1])//2) 
+        
             screen.blit(text, textpos)
             pg.display.flip()
+            
 
     def init_num(digit):
         user_input.append(digit)  
         center_num(user_input)
-          
+
+    
 
     pg.init()
     # set up a dark green screen with caption
@@ -92,7 +104,7 @@ def main():
             elif event.type == pg.KEYDOWN and event.key == pg.K_9:
                 init_num(9)
             elif event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
-                pass
+                del user_input[-1]
         
         
         
