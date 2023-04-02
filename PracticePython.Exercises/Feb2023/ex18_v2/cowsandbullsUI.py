@@ -40,42 +40,45 @@ class Startup:
         screen.blit(text, text_pos)
         pg.display.flip()
 
-def screen_reset(screen, rect_side):
-    screen.fill((126, 200, 80))  # fill entire screen with green
+class Input:
+    pass
 
-    # draw each box
-    pg.draw.rect(screen, (0, 0, 0), (100, 100, rect_side, rect_side), 4)
-    pg.draw.rect(screen, (0, 0, 0), (400, 100, rect_side, rect_side), 4)
-    pg.draw.rect(screen, (0, 0, 0), (700, 100, rect_side, rect_side), 4)
-    pg.draw.rect(screen, (0, 0, 0), (1000, 100, rect_side, rect_side), 4)
+    def screen_reset(self, screen, rect_side):
+        screen.fill((126, 200, 80))  # fill entire screen with green
 
-    pg.display.flip()  # updates screen
+        # draw each box
+        pg.draw.rect(screen, (0, 0, 0), (100, 100, rect_side, rect_side), 4)
+        pg.draw.rect(screen, (0, 0, 0), (400, 100, rect_side, rect_side), 4)
+        pg.draw.rect(screen, (0, 0, 0), (700, 100, rect_side, rect_side), 4)
+        pg.draw.rect(screen, (0, 0, 0), (1000, 100, rect_side, rect_side), 4)
+
+        pg.display.flip()  # updates screen
 
 
-def center_num():
-    screen_reset(screen, rect_side)
-    response = enumerate(user_input)
-    font = pg.font.Font(None, rect_side)
-    for position, integer in response:
+    def center_num(self):
+        self.screen_reset(screen, rect_side)
+        response = enumerate(user_input)
+        font = pg.font.Font(None, rect_side)
+        for position, integer in response:
 
-        text = font.render(str(integer), True, (10, 10, 10))
+            text = font.render(str(integer), True, (10, 10, 10))
 
-        #transform font by half of its size from the midpoint of the rect
-        
-        border = 100
-        square_midpoint_width = (rect_side // 2)
-        shift_x = position*300
-        digit_width = (font.size(str(integer))[0])
-        digit_height = (font.size(str(integer))[1])
+            #transform font by half of its size from the midpoint of the rect
+            
+            border = 100
+            square_midpoint_width = (rect_side // 2)
+            shift_x = position*300
+            digit_width = (font.size(str(integer))[0])
+            digit_height = (font.size(str(integer))[1])
 
-        textpos_x =shift_x + border + square_midpoint_width - digit_width // 2
-        textpos_y = border + square_midpoint_width - digit_height//2
+            textpos_x =shift_x + border + square_midpoint_width - digit_width // 2
+            textpos_y = border + square_midpoint_width - digit_height//2
 
-        textpos = textpos_x, textpos_y
-        
+            textpos = textpos_x, textpos_y
+            
 
-        screen.blit(text, textpos)
-        pg.display.flip()
+            screen.blit(text, textpos)
+            pg.display.flip()
 
 
 def main():
@@ -84,6 +87,7 @@ def main():
     pg.display.set_caption("Cows & Bulls")
     screen.fill((126, 200, 80))
     Startup().startup_screen()
+    input = Input()
 
     # #make 4 squares in a row
     # #draw rect  on screen   black   location        size        border size
@@ -121,12 +125,12 @@ def main():
                 continue
             elif event.key == pg.K_BACKSPACE:
                 del user_input[-1]
-                center_num()
+                input.center_num()
                 continue
 
             digit = keyDict.get(event.key, -1)
             user_input.append(digit)
-            center_num()
+            input.center_num()
 
 
 if "__main__" == __name__:
