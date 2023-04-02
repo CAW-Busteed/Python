@@ -99,17 +99,7 @@ def c_and_b_result(cowsandbulls):
         #     pass
         # elif x == 'bull':
         #     pass
-         
-        # tally_pos = 0
-        # size = 20
-        # font = pg.font.Font(None, size)
-        # text = font.render(x, True, (10, 10, 10))
-        # #TODO: place more elegantly
-        # text_pos = (tally_pos,SCREEN_HEIGHT-50)
-        # tally_pos += 20
-        # screen.blit(text, text_pos)
-        # pg.display.flip()
-        # time.sleep(0.75)
+
 
     list = enumerate(cowsandbulls)
     font = pg.font.Font(None, rect_side//2)
@@ -133,6 +123,7 @@ def c_and_b_result(cowsandbulls):
         
 
         screen.blit(text, textpos)
+        time.sleep(0.3)
         pg.display.flip()
 
 
