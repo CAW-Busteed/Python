@@ -3,8 +3,8 @@ Build a UI for cows and bulls
 four squares that fill with cows and bulls
 '''
 import pygame as pg
-# import bull
-# import time
+import bull
+import time
 
 SCREEN_WIDTH = 1600
 SCREEN_HEIGHT = 800
@@ -80,6 +80,61 @@ class Input:
             screen.blit(text, textpos)
             pg.display.flip()
 
+# class Result:
+
+    
+
+
+def c_and_b_result(cowsandbulls):
+    pg.draw.rect(screen, (255, 255, 255), (100, 200+rect_side, rect_side, rect_side), 4)
+    pg.draw.rect(screen, (255, 255, 255), (400, 200+rect_side, rect_side, rect_side), 4)
+    pg.draw.rect(screen, (255, 255, 255), (700, 200+rect_side, rect_side, rect_side), 4)
+    pg.draw.rect(screen, (255, 255, 255), (1000, 200+rect_side, rect_side, rect_side), 4)
+    pg.display.flip()
+    time.sleep(0.5)
+
+    #TODO: replace with sprites of cows and bulls that settle in the center 
+    #for x in cowsandbulls:
+        # if x == 'cow':
+        #     pass
+        # elif x == 'bull':
+        #     pass
+         
+        # tally_pos = 0
+        # size = 20
+        # font = pg.font.Font(None, size)
+        # text = font.render(x, True, (10, 10, 10))
+        # #TODO: place more elegantly
+        # text_pos = (tally_pos,SCREEN_HEIGHT-50)
+        # tally_pos += 20
+        # screen.blit(text, text_pos)
+        # pg.display.flip()
+        # time.sleep(0.75)
+
+    list = enumerate(cowsandbulls)
+    font = pg.font.Font(None, rect_side//2)
+    for position, word in list:
+
+        text = font.render(word, True, (10, 10, 10))
+
+        #transform font by half of its size from the midpoint of the rect
+        
+        x_border = 100
+        y_border = 200+rect_side
+        square_midpoint_width = (rect_side // 2)
+        shift_x = position*300
+        word_width = (font.size(word)[0])
+        word_height = (font.size(str(word))[1])
+
+        textpos_x =shift_x + x_border + square_midpoint_width - word_width // 2
+        textpos_y = y_border + square_midpoint_width - word_height//2
+
+        textpos = textpos_x, textpos_y
+        
+
+        screen.blit(text, textpos)
+        pg.display.flip()
+
 
 def main():
     # set up a dark green screen with caption
@@ -89,36 +144,22 @@ def main():
     Startup().startup_screen()
     input = Input()
 
-    # #make 4 squares in a row
-    # #draw rect  on screen   black   location        size        border size
-    # pg.draw.rect(screen, (0, 0, 0), (100, 100, rect_side, rect_side), 4)
-    # pg.draw.rect(screen, (0, 0, 0), (400, 100, rect_side, rect_side), 4)
-    # pg.draw.rect(screen, (0, 0, 0), (700, 100, rect_side, rect_side), 4)
-    # pg.draw.rect(screen, (0, 0, 0), (1000, 100, rect_side, rect_side), 4)
-
-    # #updates screen, do this for title screen or instructions
-    # pg.display.flip()
-
     #TODO:collate the bulls program to connect results to 4 squares
 
     run = True
     while run:
         clock.tick(60)
+        gen_num = [1,2,3,4]
+
+        if len(user_input) == 4:
+            result = bull.get_cowandbull(gen_num, user_input)
+            c_and_b_result(result)
+            user_input.clear()
+            time.sleep(2)
 
         for event in pg.event.get():
             if event.type != pg.KEYDOWN:
                 continue
-
-            # if len(user_input) == 4:
-            #     # if event.type == pg.QUIT:
-            #     #     run = False
-            #     if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
-            #         run = False
-            #         #TODO: this is where we add in the bull.py
-            #     continue
-            # elif event.type == pg.QUIT:
-            #     run = False
-            #     continue
 
             if event.key == pg.K_ESCAPE:
                 run = False
@@ -128,7 +169,7 @@ def main():
                 input.center_num()
                 continue
 
-            digit = keyDict.get(event.key, -1)
+            digit = keyDict.get(event.key, 'X')
             user_input.append(digit)
             input.center_num()
 
