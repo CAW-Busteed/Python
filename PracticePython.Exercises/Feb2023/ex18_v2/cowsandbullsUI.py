@@ -29,6 +29,14 @@ keyDict = {
     pg.K_9: 9,
 }
 
+def startup_screen():
+    #TODO: refine the startup screen
+    size = 30
+    font = pg.font.Font(None, size)
+    text = font.render('How to play:', True, (10, 10, 10))
+    text_pos = (0,0)
+    screen.blit(text, text_pos)
+    pg.display.flip()
 
 def screen_reset(screen, rect_side):
     screen.fill((126, 200, 80))  # fill entire screen with green
@@ -73,16 +81,17 @@ def main():
     pg.init()
     pg.display.set_caption("Cows & Bulls")
     screen.fill((126, 200, 80))
+    startup_screen()
 
-    #make 4 squares in a row
-    #draw rect  on screen   black   location        size        border size
-    pg.draw.rect(screen, (0, 0, 0), (100, 100, rect_side, rect_side), 4)
-    pg.draw.rect(screen, (0, 0, 0), (400, 100, rect_side, rect_side), 4)
-    pg.draw.rect(screen, (0, 0, 0), (700, 100, rect_side, rect_side), 4)
-    pg.draw.rect(screen, (0, 0, 0), (1000, 100, rect_side, rect_side), 4)
+    # #make 4 squares in a row
+    # #draw rect  on screen   black   location        size        border size
+    # pg.draw.rect(screen, (0, 0, 0), (100, 100, rect_side, rect_side), 4)
+    # pg.draw.rect(screen, (0, 0, 0), (400, 100, rect_side, rect_side), 4)
+    # pg.draw.rect(screen, (0, 0, 0), (700, 100, rect_side, rect_side), 4)
+    # pg.draw.rect(screen, (0, 0, 0), (1000, 100, rect_side, rect_side), 4)
 
-    #updates screen
-    pg.display.flip()
+    # #updates screen, do this for title screen or instructions
+    # pg.display.flip()
 
     #TODO:collate the bulls program to connect results to 4 squares
 
