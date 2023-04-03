@@ -4,6 +4,7 @@ four squares that fill with cows and bulls
 '''
 import pygame as pg
 import bull
+from textwrap3 import wrap
 import time
 
 SCREEN_WIDTH = 1600
@@ -32,13 +33,41 @@ keyDict = {
 
 class Startup:
     def startup_screen(self):
-        #TODO: refine the startup screen
-        size = 30
+        #TODO: (H,M) refine the startup screen
+        size = SCREEN_HEIGHT//10
         font = pg.font.Font(None, size)
-        text = font.render('How to play:', True, (10, 10, 10))
-        text_pos = (0,0)
+        title = 'How to Play'
+        text = font.render(title, True, (10, 10, 10))
+        title_width = (font.size(title)[0])
+        indent = (SCREEN_WIDTH - title_width)//2
+
+        text_pos = (indent,0)
         screen.blit(text, text_pos)
         pg.display.flip()
+
+class Explanation:
+    def explanation_screen(self):
+        size = SCREEN_HEIGHT//40
+        font = pg.font.Font(None, size)
+        explain = 'You will guess a four digit number. I will give you a response of either cows or bulls. A cow means a correct number and correct place. A bull is a correct guess in the wrong place.'
+        x = wrap(explain, 30)
+        tally = 0
+        for i in range(len(x)):
+            text = font.render(x[i], True, (10, 10, 10))
+            line_width = (font.size(i)[0])
+            text_y =100+(tally*(font.size(i)[1]))
+            text_x = (SCREEN_WIDTH-line_width)//2
+            text_pos = (text_x,text_y)
+            screen.blit(text,text_pos)
+            tally+=1
+        pg.display.flip()
+
+class Victory:
+    def victory_screen(self, tally):
+        size = SCREEN_HEIGHT//5
+        font = pg.font.Font(None, size)
+        end = 'YOU WIN'
+
 
 class Input:
     pass
@@ -93,7 +122,7 @@ def c_and_b_result(cowsandbulls):
     pg.display.flip()
     time.sleep(0.5)
 
-    #TODO: replace with sprites of cows and bulls that settle in the center 
+    #TODO: (vL,H) replace with sprites of cows and bulls that settle in the center 
     #for x in cowsandbulls:
         # if x == 'cow':
         #     pass
@@ -133,18 +162,31 @@ def main():
     pg.display.set_caption("Cows & Bulls")
     screen.fill((126, 200, 80))
     Startup().startup_screen()
+
+    #TODO: (M,H) figure out how wrap works to run the explanation
+    #Explanation().explanation_screen()
     input = Input()
 
-    #TODO:collate the bulls program to connect results to 4 squares
 
     run = True
     while run:
         clock.tick(60)
+        tally = 0
         gen_num = [1,2,3,4]
 
         if len(user_input) == 4:
             result = bull.get_cowandbull(gen_num, user_input)
             c_and_b_result(result)
+            tally+=1
+            bovine = bull.moo_count(result)
+
+            if len(bovine[0]) == 4:
+                #TODO: (H,M) victory screen, give option to quit or reset loop
+                print(f'All cows, you win! You guessed {tally} times')
+                break
+            else:
+                print('Try again!')
+
             user_input.clear()
             time.sleep(2)
 
@@ -159,7 +201,8 @@ def main():
                 del user_input[-1]
                 input.center_num()
                 continue
-
+            
+            #TODO (M,H) wrong input alert, window that moves in with warning
             digit = keyDict.get(event.key, 'X')
             user_input.append(digit)
             input.center_num()
