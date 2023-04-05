@@ -69,14 +69,15 @@ def get_cowandbull(gen, input):
 
 
 def moo_count(x):
+    cows = 0
+    bulls = 0
+    
     for bovine in x:
-        cows = 0
-        bulls = 0
         if bovine == 'cow':
-            cows+=1
+            cows += 1
         elif bovine == 'bull':
-            bulls+=1
-        moo = [cows, bulls]
+            bulls += 1
+    moo = [cows, bulls]
     return moo
 
 def cows_and_bulls_main(user_res):
