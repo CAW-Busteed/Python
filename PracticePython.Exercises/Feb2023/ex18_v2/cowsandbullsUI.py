@@ -101,7 +101,15 @@ class Error:
         pg.draw.rect(screen, (255,255,255), (popup_x_end,popup_y,rect_side,rect_side), 0)
         pg.draw.rect(screen, (0,0,0), (popup_x_end,popup_y,rect_side,rect_side), 2)
 
-        
+        size =30
+        font = pg.font.Font(None, size)
+        error_message ="Use digits!"
+        text = font.render(error_message, True, (0, 0, 0))
+
+        title_width = (font.size(error_message)[0])
+        indent = (SCREEN_WIDTH - title_width)
+        spacing  = SCREEN_HEIGHT
+
         pg.display.flip()
         
 
@@ -170,7 +178,7 @@ def c_and_b_result(cowsandbulls):
     pg.display.flip()
     time.sleep(0.5)
 
-    #TODO: (vL,H) replace with sprites of cows and bulls that settle in the center 
+    #TODO: (vL,H) replace with sprites of cows and bulls that appear in the center 
     #for x in cowsandbulls:
         # if x == 'cow':
         #     pass
@@ -234,7 +242,7 @@ def main():
                 input.screen_reset(screen,rect_side)
                 input.center_num()
                 continue
-                #TODO: (L,L) give option to quit or reset loop
+            #TODO: (L,L) give option to quit or reset loop
             else:
                 time.sleep(1)
                 screen.fill((126, 200, 80)) 
