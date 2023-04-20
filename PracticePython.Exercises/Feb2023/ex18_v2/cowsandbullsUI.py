@@ -100,6 +100,8 @@ class Error:
         popup_y=SCREEN_HEIGHT-rect_side
         pg.draw.rect(screen, (255,255,255), (popup_x_end,popup_y,rect_side,rect_side), 0)
         pg.draw.rect(screen, (0,0,0), (popup_x_end,popup_y,rect_side,rect_side), 2)
+
+        
         pg.display.flip()
         
 
