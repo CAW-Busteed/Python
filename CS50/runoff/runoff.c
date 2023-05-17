@@ -159,7 +159,7 @@ void tabulate(void)
         }
     }
 
-    char* ranking[running];
+    string ranking[running];
     //go through each voter's preference
     for (int i= 0; i < voter_count; i++)
     {
