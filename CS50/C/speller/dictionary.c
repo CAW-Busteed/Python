@@ -2,10 +2,11 @@
 
 #include <ctype.h>
 #include <stdbool.h>
-#include <stdlib.h>
 #include <string.h>
-#include <assert.h>
+#include <strings.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
 
 #include "dictionary.h"
 
@@ -34,8 +35,10 @@ bool check(const char *word)
     // node *table[N];
     int length = strlen(word);
 
-    // RESult is the lowercase letters put together
-    char *res = NULL;
+    // RESult is the lowercase letters put together. before, I used: char *res = NULL;
+    // strncat expects a valid destination string, so you need to allocate memory for res before appending characters to it.
+    char *res = malloc((length + 1) * sizeof(char));
+    res[0] = '\0';
 
     // set up a baseline to compare dict to (all lowercase)
     // TODO: maybe get rid of it, consider the apostrophes
@@ -76,18 +79,21 @@ bool load(const char *dictionary)
 
     if (dictionary != NULL)
     {
-        for (int i = 0; i < total_w; i++) // hndle each word immediately, EOF
+        for (int i = 0; i < total_w; i++) // handle each word immediately, EOF
         {
             // make pointer and allocate size
             node *w;
             w = malloc(sizeof(node));
 
-            char *text = malloc(sizeof(dictionary[i])); // won't take doc, maybe problem. used vari dictionary instead
-            *text = dictionary[i];
-            // malloc lots of bytes at a time and
-            // add more every time we hit a block
+            // dictionary[i] represents a character from the dictionary string and not the length of the string itself.
+            // use strlen(dictionary) + 1 to allocate enough memory to store the word.
+            // char *text = malloc(sizeof(dictionary[i]));
+            //  *text = dictionary[i];
+            char *text = malloc((strlen(dictionary) + 1) * sizeof(char));
 
-            if (fscanf(doc, "%s", text) == true)
+            // check if it works
+            // previously: if (fscanf(doc, "%s", text) == true)
+            if (fscanf(doc, "%s", text) == 1)
             {
                 // append word to new node
                 strcpy(w->word, text);
@@ -132,6 +138,13 @@ bool unload(void)
     node *temp;
     int verify = 0;
 
+    // initialize table array with memory allocation
+    for (int i = 0; i < N; i++)
+    {
+        table[i] = malloc(sizeof(node));
+        table[i]->next = NULL;
+    }
+
     for (int i = 0; i < N; i++)
     {
         del_cursor = table[i]->next; // or del_cursor->next = table[i]->next;
@@ -152,18 +165,29 @@ bool unload(void)
 
 int dic_count(const char *dictionary)
 {
-    // s is the complete string of words, which we count from spaces
-    char *s = NULL;
-    int count = 0;
+    // open file as doc
+    FILE *doc;
+    doc = fopen(dictionary, "r");
 
-    scanf(dictionary, s);
-    for (int i = 0; s[i] != '\0'; i++)
+    // check to see if doc is available
+    if (doc == NULL)
     {
-        if (s[i] == ' ' || s[i] == '\t' || s[i] == '\n' || s[i] == '\0')
-            count++;
-        else if (strcmp(&s[i], "EOF") == 0) // necessary string compare function
-            break;
+        printf("Failed to open dictionary file");
+        return 0;
     }
-    free(s);
+
+    // initialize count and go through document to count
+    int count = 0;
+    char word[LENGTH + 1];
+    while (fscanf(doc, "%s", word) == 1)
+    {
+        count++;
+    }
+    fclose(doc);
     return count;
+}
+
+int main(void)
+{
+    assert(false);
 }
