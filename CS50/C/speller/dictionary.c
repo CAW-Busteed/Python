@@ -12,7 +12,7 @@
 #define N 26 // number of buckets in hash table
 
 // Global variables and functions
-int total_w;
+int total_w = 0;
 int dic_count(const char *dictionary);
 
 // Represents a node in a hash table
@@ -22,11 +22,11 @@ typedef struct node
     struct node *next;
 } node;
 
-// TODO: Choose 
+// TODO: Choose
 // const unsigned int N = 26;
 
 // Hash table, each of which is a node pointer
-node *table[26] = {NULL};
+node *table[N] = {NULL};
 
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
@@ -100,7 +100,7 @@ bool load(const char *dictionary)
                 strcpy(w->word, text);
                 // define link as the next in the hash
                 // hash is defined so it should work off of the buckets (this should also catch the NULL)
-                w->next = table[hash(text)]->next;
+                w->next = table[hash(text)]->next; // TODO: segmentation fault
                 // redefine hash's next link as the new node
                 table[hash(text)]->next = w;
                 free(text);
@@ -190,5 +190,11 @@ int dic_count(const char *dictionary)
 
 int main(void)
 {
-    assert(false);
+    FILE *doc;
+    char word[N];
+    doc = fopen("dictionaries/small.txt", "r");
+
+    fgets(&word[0], N, doc);
+    assert(word == "cat");
+    // assert(load("dictionaries/small") == true);
 }

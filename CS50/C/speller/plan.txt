@@ -1,0 +1,27 @@
+expectant results for each test
+Hash returned what I requested (will modify further later)
+check
+    works by
+        taking the length of the word, alloacating memory for it, and turning every letter into the lowercase 
+        we hash the word to get its address and use a pointer node to go through the table 
+        (so long as the table[x] doesnt lead to NULL)
+        the pointer to the word is compared and returns true if it is identical
+    assert by
+        giving a word to compare to listed dictionary
+        returns true if word is identical to dictionary word
+
+load (more complicated)
+    works by
+    assert by
+        confirming the dictionary is in the linked list
+
+size
+    works by
+        relying on global variable total_w
+    assert by
+        load, then assert size is equal to the total_w
+
+unload
+    works by
+    assert by
+        I have no idea. This is for later.      
