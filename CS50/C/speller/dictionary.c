@@ -192,9 +192,16 @@ int main(void)
 {
     FILE *doc;
     char word[N];
-    doc = fopen("dictionaries/small.txt", "r");
-
-    fgets(&word[0], N, doc);
-    assert(word == "cat");
+    doc = fopen("dictionaries/small", "r");
+    if (doc != NULL)
+    {
+        fgets(&word[0], N, doc);
+        printf("%s", word);
+        assert(strcmp(word, "cat\n") == 0);
+    }
+    else
+    {
+        printf("dictionary failure");
+    }
     // assert(load("dictionaries/small") == true);
 }
