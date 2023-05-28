@@ -9,6 +9,7 @@
 #include <assert.h>
 
 #include "dictionary.h"
+#define N 26 // number of buckets in hash table
 
 // Global variables and functions
 int total_w;
@@ -21,11 +22,11 @@ typedef struct node
     struct node *next;
 } node;
 
-// TODO: Choose number of buckets in hash table
-const unsigned int N = 26;
+// TODO: Choose 
+// const unsigned int N = 26;
 
 // Hash table, each of which is a node pointer
-node *table[N];
+node *table[26] = {NULL};
 
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
