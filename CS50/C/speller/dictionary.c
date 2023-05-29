@@ -9,7 +9,7 @@
 #include <assert.h>
 
 #include "dictionary.h"
-#define N 26 // number of buckets in hash table
+#define N 26 // number of buckets in hash table, consider constant integer
 
 // Global variables and functions
 int total_w = 0;
@@ -22,24 +22,18 @@ typedef struct node
     struct node *next;
 } node;
 
-// TODO: Choose
-// const unsigned int N = 26;
-
 // Hash table, each of which is a node pointer
 node *table[N] = {NULL};
 
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
-
-    // Hash table, each of which is a node pointer
-    // node *table[N];
     int length = strlen(word);
 
     // RESult is the lowercase letters put together. before, I used: char *res = NULL;
     // strncat expects a valid destination string, so you need to allocate memory for res before appending characters to it.
     char *res = malloc((length + 1) * sizeof(char));
-    res[0] = '\0';
+    res[length - 1] = '\0';
 
     // set up a baseline to compare dict to (all lowercase)
     // TODO: maybe get rid of it, consider the apostrophes
@@ -74,36 +68,42 @@ unsigned int hash(const char *word)
 bool load(const char *dictionary)
 {
     total_w = dic_count(dictionary);
+    assert(total_w == 2); // works delete
 
     FILE *doc;
+    char text[LENGTH];
     doc = fopen(dictionary, "r");
+    assert(doc != 0); // works, delte
 
     if (dictionary != NULL)
     {
-        for (int i = 0; i < total_w; i++) // handle each word immediately, EOF
+        for (int i = 0; i < total_w; i++) // while (x != "EOF")
         {
             // make pointer and allocate size
             node *w;
             w = malloc(sizeof(node));
+            assert(w != NULL); // works, delete
 
-            // dictionary[i] represents a character from the dictionary string and not the length of the string itself.
-            // use strlen(dictionary) + 1 to allocate enough memory to store the word.
-            // char *text = malloc(sizeof(dictionary[i]));
-            //  *text = dictionary[i];
-            char *text = malloc((strlen(dictionary) + 1) * sizeof(char));
+            fgets(text, N, doc);
+            int cutoff = strcspn(text, "\n");
+            text[cutoff] = 0;
+            assert(strcmp(text, "cat") == 0); // works, delete
 
             // check if it works
-            // previously: if (fscanf(doc, "%s", text) == true)
             if (fscanf(doc, "%s", text) == 1)
             {
-                // append word to new node
+                // append word to new node and  define link as the next in the hash
                 strcpy(w->word, text);
-                // define link as the next in the hash
-                // hash is defined so it should work off of the buckets (this should also catch the NULL)
-                w->next = table[hash(text)]->next; // TODO: segmentation fault
+                w->next = table[hash(text)]->next; // TODO: segmentation fault?
+
+                // how do i compare a pointer location to a result?
+                assert(strcasecmp(table[2]->next, "cat") == 0); // ASSERTION
+
                 // redefine hash's next link as the new node
                 table[hash(text)]->next = w;
-                free(text);
+                assert(table[2]->next == w); // UNREL ASSERTION
+
+                // free(text);
             }
             else
             {
@@ -135,19 +135,14 @@ unsigned int size(void)
 // free all the nodes by
 bool unload(void)
 {
+    // initialize deletion node, temp node, and verfication to count totals
     node *del_cursor;
     node *temp;
     int verify = 0;
 
-    // initialize table array with memory allocation
     for (int i = 0; i < N; i++)
     {
-        table[i] = malloc(sizeof(node));
-        table[i]->next = NULL;
-    }
-
-    for (int i = 0; i < N; i++)
-    {
+        // go through next in hash table. If there is something, temp stays, del moves on, free temp
         del_cursor = table[i]->next; // or del_cursor->next = table[i]->next;
         while (del_cursor != NULL)
         {
@@ -157,6 +152,14 @@ bool unload(void)
         }
         verify++;
     }
+
+    // initialize table array with memory allocation, orignally above
+    for (int i = 0; i < N; i++)
+    {
+        table[i] = malloc(sizeof(node));
+        table[i]->next = NULL;
+    }
+
     if (verify != N)
     {
         return false;
@@ -184,24 +187,12 @@ int dic_count(const char *dictionary)
     {
         count++;
     }
+    assert(count == 2); // ASSERTION
     fclose(doc);
     return count;
 }
 
 int main(void)
 {
-    FILE *doc;
-    char word[N];
-    doc = fopen("dictionaries/small", "r");
-    if (doc != NULL)
-    {
-        fgets(&word[0], N, doc);
-        printf("%s", word);
-        assert(strcmp(word, "cat\n") == 0);
-    }
-    else
-    {
-        printf("dictionary failure");
-    }
-    // assert(load("dictionaries/small") == true);
+    load("dictionaries/small");
 }
