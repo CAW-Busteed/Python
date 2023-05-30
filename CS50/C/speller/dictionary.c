@@ -68,48 +68,48 @@ unsigned int hash(const char *word)
 bool load(const char *dictionary)
 {
     total_w = dic_count(dictionary);
-    assert(total_w == 2); // works delete
+    // assert(total_w == 2); //------------------------------------------------ works delete
 
     FILE *doc;
     char text[LENGTH];
     doc = fopen(dictionary, "r");
-    assert(doc != 0); // works, delte
+    // assert(doc != 0); // ----------------------------------------------------works, delte
 
     if (dictionary != NULL)
     {
+        // initialize table array with memory allocation(maybe put outside of function?)
+        for (int i = 0; i < N; i++)
+        {
+            table[i] = malloc(sizeof(node));
+            table[i]->next = NULL;
+        }
+
         for (int i = 0; i < total_w; i++) // while (x != "EOF")
         {
             // make pointer and allocate size
-            node *w;
-            w = malloc(sizeof(node));
-            assert(w != NULL); // works, delete
+            node *w = malloc(sizeof(node));
+            // assert(w != NULL); // ------------------------------------works, delete
 
-            fgets(text, N, doc);
+            fgets(text, LENGTH, doc);
             int cutoff = strcspn(text, "\n");
             text[cutoff] = 0;
-            assert(strcmp(text, "cat") == 0); // works, delete
+            // assert(strcmp(text, "cat") == 0); // ----------------------works, delete
 
-            // check if it works
-            if (fscanf(doc, "%s", text) == 1)
-            {
-                // append word to new node and  define link as the next in the hash
-                strcpy(w->word, text);
-                w->next = table[hash(text)]->next; // TODO: segmentation fault?
+            // // check if it works
+            // if (fscanf(doc, "%s", text) != 1)
+            // {
+            //     printf("scan failed");
+            //     return false;
+            // }
+            // append word to new node and  define link as the next in the hash
+            strcpy(w->word, text);
+            w->next = table[hash(text)]->next;
 
-                // how do i compare a pointer location to a result?
-                assert(strcasecmp(table[2]->next, "cat") == 0); // ASSERTION
+            // assert(strcasecmp(table[2]->next->word, "caterpillar") == 0); // ASSERTION
 
-                // redefine hash's next link as the new node
-                table[hash(text)]->next = w;
-                assert(table[2]->next == w); // UNREL ASSERTION
-
-                // free(text);
-            }
-            else
-            {
-                printf("scan failed");
-                return false;
-            }
+            // redefine hash's next link as the new node
+            table[hash(text)]->next = w;
+            // assert(strcmp(table[2]->next->word, w->word) == 0); //  ---------------ASSERTION passed
         }
     }
     else
@@ -153,13 +153,6 @@ bool unload(void)
         verify++;
     }
 
-    // initialize table array with memory allocation, orignally above
-    for (int i = 0; i < N; i++)
-    {
-        table[i] = malloc(sizeof(node));
-        table[i]->next = NULL;
-    }
-
     if (verify != N)
     {
         return false;
@@ -187,7 +180,7 @@ int dic_count(const char *dictionary)
     {
         count++;
     }
-    assert(count == 2); // ASSERTION
+    assert(count == 4); // ASSERTION successful
     fclose(doc);
     return count;
 }
@@ -195,4 +188,5 @@ int dic_count(const char *dictionary)
 int main(void)
 {
     load("dictionaries/small");
+    printf("%s", table[2]->word);
 }
