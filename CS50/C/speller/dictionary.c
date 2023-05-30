@@ -25,13 +25,13 @@ typedef struct node
 // Hash table, each of which is a node pointer
 node *table[N] = {NULL};
 
-// Returns true if word is in dictionary, else false
+// Returns true if word is in dictionary, else false----------------------------------Not WAI, investigate
 bool check(const char *word)
 {
     int length = strlen(word);
 
-    // RESult is the lowercase letters put together. before, I used: char *res = NULL;
-    // strncat expects a valid destination string, so you need to allocate memory for res before appending characters to it.
+    // RESult is the lowercase letters put together
+    // strncat expects a valid destination, allocate memory for res before appending characters to it.
     char *res = malloc((length + 1) * sizeof(char));
     res[length - 1] = '\0';
 
@@ -57,14 +57,14 @@ bool check(const char *word)
     return false;
 }
 
-// Hashes word to a number
+// Hashes word to a number-----------------------------------------------------WAI, for now
 unsigned int hash(const char *word)
 {
     // TODO: Improve this hash function
     return toupper(word[0]) - 'A';
 }
 
-// Loads dictionary into memory, returning true if successful, else false
+// Loads dictionary into memory, returning true if successful, else false------------Potentially WAI
 bool load(const char *dictionary)
 {
     total_w = dic_count(dictionary);
@@ -120,10 +120,10 @@ bool load(const char *dictionary)
     return true;
 }
 
-// Returns number of words in dictionary if loaded, else 0 if not yet loaded
+// Returns number of words in dictionary if loaded, else 0 if not yet loaded----------WAI
 unsigned int size(void)
 {
-    if (total_w != 0) // error because pointer and integer cannot be compared (total_w != NULL)
+    if (total_w != 0)
     {
         return total_w;
     }
@@ -140,15 +140,18 @@ bool unload(void)
     node *temp;
     int verify = 0;
 
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < N; i++) // TODO: correct i to 0 once assertions are done
     {
         // go through next in hash table. If there is something, temp stays, del moves on, free temp
         del_cursor = table[i]->next; // or del_cursor->next = table[i]->next;
+        // assert(strcasecmp(table[2]->next->word, del_cursor->word)); //---------------------------------ASSERTION failed
+
         while (del_cursor != NULL)
         {
             temp = del_cursor;
             del_cursor = del_cursor->next;
             free(temp);
+            // assert(temp == NULL); //--------------------------------------------------------------------ASSERTION failed
         }
         verify++;
     }
@@ -180,7 +183,7 @@ int dic_count(const char *dictionary)
     {
         count++;
     }
-    assert(count == 4); // ASSERTION successful
+    // assert(count == 4); // ASSERTION successful
     fclose(doc);
     return count;
 }
@@ -188,5 +191,8 @@ int dic_count(const char *dictionary)
 int main(void)
 {
     load("dictionaries/small");
-    printf("%s", table[2]->word);
+    assert(strcasecmp(table[2]->next->word, "clamp") == 0); //--------------------------Assertion pass
+    assert(size() == 4);                                    //-------------------------ASSERTION pass
+    assert(check("cardio") == true);                        //-------------------------ASSERTION fail
+    unload();
 }
