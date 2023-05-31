@@ -25,34 +25,28 @@ typedef struct node
 // Hash table, each of which is a node pointer
 node *table[N] = {NULL};
 
-// Returns true if word is in dictionary, else false----------------------------------Not WAI, investigate
+// Returns true if word is in dictionary, else false----------------------------------Not WAI
 bool check(const char *word)
 {
-    int length = strlen(word);
-
-    // RESult is the lowercase letters put together
-    // strncat expects a valid destination, allocate memory for res before appending characters to it.
-    char *res = malloc((length + 1) * sizeof(char));
-    res[length - 1] = '\0';
-
-    // set up a baseline to compare dict to (all lowercase)
-    // TODO: maybe get rid of it, consider the apostrophes
-    for (int i = 0; i < length; i++)
-    {
-        char des = tolower(word[i]);
-        strncat(res, &des, 1);
-    }
-    int x = hash(res);
+    int x = hash(word);
 
     node *current = table[x]->next;
     while (current != NULL)
     {
-        if (strcasecmp(current->word, res) == 0)
+        int result = 0;
+        printf("%s \n", word);
+        printf("%s \n", current->word);
+        // char *comparison = word;
+        // char *
+        result = strcasecmp(current->word, word);
+        if (result == 0) //--------------------------------------------fails HERE
         {
-            // printf("found it!");
             return true;
         }
-        current = current->next;
+        else
+        {
+            current = current->next;
+        }
     }
     return false;
 }
@@ -68,10 +62,10 @@ unsigned int hash(const char *word)
 bool load(const char *dictionary)
 {
     total_w = dic_count(dictionary);
-    // assert(total_w == 2); //------------------------------------------------ works delete
+    // assert(total_w == 5); //------------------------------------------------ works delete
 
     FILE *doc;
-    char text[LENGTH];
+    char text[LENGTH]; // TODO:What if I want to reduce the text to its actual size to save space?
     doc = fopen(dictionary, "r");
     // assert(doc != 0); // ----------------------------------------------------works, delte
 
@@ -83,8 +77,14 @@ bool load(const char *dictionary)
             table[i] = malloc(sizeof(node));
             table[i]->next = NULL;
         }
+        // // check if it works
+        // if (fscanf(doc, "%s", text) != 1)
+        // {
+        //     printf("scan failed");
+        //     return false;
+        // }
 
-        for (int i = 0; i < total_w; i++) // while (x != "EOF")
+        for (int i = 0; i < total_w; i++)
         {
             // make pointer and allocate size
             node *w = malloc(sizeof(node));
@@ -95,17 +95,9 @@ bool load(const char *dictionary)
             text[cutoff] = 0;
             // assert(strcmp(text, "cat") == 0); // ----------------------works, delete
 
-            // // check if it works
-            // if (fscanf(doc, "%s", text) != 1)
-            // {
-            //     printf("scan failed");
-            //     return false;
-            // }
             // append word to new node and  define link as the next in the hash
             strcpy(w->word, text);
             w->next = table[hash(text)]->next;
-
-            // assert(strcasecmp(table[2]->next->word, "caterpillar") == 0); // ASSERTION
 
             // redefine hash's next link as the new node
             table[hash(text)]->next = w;
@@ -140,18 +132,17 @@ bool unload(void)
     node *temp;
     int verify = 0;
 
-    for (int i = 0; i < N; i++) // TODO: correct i to 0 once assertions are done
+    for (int i = 2; i < N; i++) // TODO: correct i to 0 once assertions are done
     {
         // go through next in hash table. If there is something, temp stays, del moves on, free temp
-        del_cursor = table[i]->next; // or del_cursor->next = table[i]->next;
-        // assert(strcasecmp(table[2]->next->word, del_cursor->word)); //---------------------------------ASSERTION failed
+        del_cursor = table[i]->next;                                     // del_cursor->next = table[i]->next;
+        assert(strcasecmp(table[2]->next->word, del_cursor->word) == 0); //---------------------------------ASSERTION failed, why? it was identical!
 
         while (del_cursor != NULL)
         {
             temp = del_cursor;
             del_cursor = del_cursor->next;
             free(temp);
-            // assert(temp == NULL); //--------------------------------------------------------------------ASSERTION failed
         }
         verify++;
     }
@@ -191,8 +182,8 @@ int dic_count(const char *dictionary)
 int main(void)
 {
     load("dictionaries/small");
-    assert(strcasecmp(table[2]->next->word, "clamp") == 0); //--------------------------Assertion pass
-    assert(size() == 4);                                    //-------------------------ASSERTION pass
-    assert(check("cardio") == true);                        //-------------------------ASSERTION fail
+    assert(strcasecmp(table[2]->next->next->word, "clamp") == 0); //--------------------------Assertion pass
+    assert(size() == 5);                                          //-------------------------ASSERTION pass
+    assert(check("clamp") == true);                               //-------------------------ASSERTION fail
     unload();
 }

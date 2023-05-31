@@ -24,4 +24,44 @@ size
 unload
     works by
     assert by
-        I have no idea. This is for later.      
+        I have no idea. This is for later.
+
+
+alternatives
+
+// RESult is the lowercase letters put together; strncat expects a valid destination, allocate memory for res before appending characters to it.
+// char *res = malloc((length + 1) * sizeof(char));
+// res[length] = '\0';     //initialize res as an empty string ('\0')
+
+// // set up a baseline to compare dict to (all lowercase)
+// for (int i = 0; i < length; i++)
+// {
+//     //concatenate each lowercase character using a temporary string (des) and strncat.
+//     char des[2] = {tolower(word[i]), '\0'}; //-----------------------------------------------------why does this fail
+//     strncat(res, des, 2);
+// }
+
+// char *res;
+// strncat(res, word, length);
+// int i = 0;
+// while (res[i])
+// {
+//     putchar(tolower(res[i]));
+//     i++;
+// }
+
+// char *res = malloc((length + 1) * sizeof(char)); // Allocate memory for res
+// for (int i = 0; i < length; i++)
+// {
+//     res[i] = tolower(word[i]); // Convert each character to lowercase-------------------fails HERE
+// }
+// const char *res = word;
+
+// char *res;
+// strncat(res, word, length);
+
+    // int length = strlen(word);
+    // for (int i = 0; word[i]; i++)
+    // {
+    //     word[i] = tolower(word[i]);
+    // }
